@@ -17,8 +17,3 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.listen(PORT, function(){
     console.log("Express listening on port ${PORT}");
 });
-
-// app.listen(3000, function(){
-//     console.log("Listening");
-// });
-
