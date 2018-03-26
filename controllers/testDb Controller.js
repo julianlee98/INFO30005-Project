@@ -7,3 +7,7 @@ module.exports.mainContent = function(req, res){
 module.exports.formatedContent = function (req,res) {
     res.render('home', {content: dbContent[0]});
 };
+
+module.exports.comingSoon  = function (req, res) {
+    res.render('comingsoon', {content: dbContent[0]});
+};
