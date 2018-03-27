@@ -23,6 +23,20 @@ body{
     top: 800px;
 }
 
+.logo{
+    font-family: 'Syncopate', sans-serif;
+    color: #e05915;
+}
+
+.sub{
+    font-size: 15px;
+}
+
+.comingsoon{
+    font-size: 25px;
+    margin-bottom: 1%;
+}
+
 .animate{
     animation: rise 1s ease forwards;
 }
@@ -33,6 +47,7 @@ body{
 .fancy {
     font-family: 'Cinzel Decorative', cursive;
     font-size: 70px;
+    margin-bottom: 0px;
 }
 
 .cardEffect {
@@ -45,7 +60,7 @@ body{
 }
 
 .description {
-    margin: 5% 10% 0px 10%;
+    margin: 2% 10% 0px 10%;
 }
 
 .mainfont {
