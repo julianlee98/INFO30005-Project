@@ -6,15 +6,50 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/jquery/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="myCss/mainstylesheet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Metrophobic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <meta charset = "UTF-8">
     <title>Coming Soon</title>
+
+
+    <script>
+        $(document).ready(function(){
+            $("#notify").on("click", function(){
+               $("#registration_area").addClass("animate");
+            });
+        });
+    </script>
+
+
 </head>
 <body>
  <div class = "container-fluid cardEffect" id = "main_area">
      <div class = "content">
-         <h1> Coming Soon.</h1>
-         <p> The social network that puts fitness first</p>
+         <h1 class = "fancy">FITWORK </h1>
+         <p class = "mainfont"> The social network that puts fitness first</p>
+     </div>
+     <div class="description">
+         <p class="mainfont">
+             Sharing your fitness journey and achievements shouldn't be this hard. It's something you and
+             everyone in your life should be proud of. Fitness shouldn't be something you have to do alone.
+         </p>
+         <p class = mainfont> We're here to fix that.</p>
+     </div>
+     <div class = "buttonArea">
+         <button class = "btn btn-warning btn-lg" type="button" id ="notify"> Notify me </button>
      </div>
  </div>
+<div class="container-fluid cardEffect" id = "registration_area">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control input-lg" id="search-church" placeholder="Enter your email">
+                <span class="input-group-btn">
+        <button class="btn btn-default btn-lg " type="submit">Get Notified</button>
+      </span>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

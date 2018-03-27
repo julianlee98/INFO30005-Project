@@ -1,14 +1,38 @@
 body{
-    background-image: url("Images/whitebrick.png");
+    background-image: url("Images/bg.jpg");
+    overflow:hidden;
     /*background-color: #22264b;*/
 }
 
 #main_area {
-    /*background-image: url("Images/whitebrick.png");*/
-    background-color: #b56969;
-    width: 60vw;
-    height: 60vh;
-    margin-top: 15%;
+    background-color: #f1f1f1;
+    position: relative;
+    opacity: 0.8;
+    width: 60%;
+    height: 45%;
+    top: -800px;
+    animation: drop 1s ease forwards;
+}
+#registration_area {
+    background-color: #f1f1f1;
+    position: relative;
+    opacity: 0.9;
+    width: 60%;
+    height: 25%;
+    padding: 0.5% 0 0.5% 0;
+    top: 800px;
+}
+
+.animate{
+    animation: rise 1s ease forwards;
+}
+.emailreg{
+    margin-left: 1%;
+}
+
+.fancy {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 70px;
 }
 
 .cardEffect {
@@ -20,7 +44,46 @@ body{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.description {
+    margin: 5% 10% 0px 10%;
+}
+
+.mainfont {
+    font-family: 'Metrophobic', sans-serif;
+}
+
 .content{
     text-align: center;
-    padding-top: 10%;
+    padding-top: 5%;
+    /*padding-left: 1%;*/
+}
+
+.buttonArea{
+    text-align: center;
+    padding-top: 2%;
+    margin-bottom: 5%;
+}
+
+.orange{
+    color: #e05915;
+}
+
+.btn-warning {
+    background-color: #e05915 !important;
+}
+
+.btn-warning:hover , .btn-warning:active, .btn-warning:visited{
+    background-color: #854210; !important;
+}
+
+/*ANIMATION STUFF*/
+@keyframes drop {
+    0%{opacity: 0}
+    70%{ transform: translateY(1050px)}
+    100%{transform: translateY(900px); opacity: 0.9;}
+}
+@keyframes rise {
+    0%{opacity: 0}
+    70%{ transform: translateY(-700px)}
+    100%{transform: translateY(-680px); opacity: 0.9;}
 }
