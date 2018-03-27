@@ -34,7 +34,12 @@ body{
 
 .comingsoon{
     font-size: 25px;
-    margin-bottom: 1%;
+}
+
+.names{
+    font-size: 9px;
+    color: #e05915;
+    margin-bottom: 2%;
 }
 
 .animate{
