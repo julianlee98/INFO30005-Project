@@ -5,12 +5,50 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="myCss/mainstylesheet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Metrophobic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <meta charset = "UTF-8">
-    <title> Home </title>
+    <title>Home</title>
+
+
+    <script>
+        $(document).ready(function(){
+        });
+    </script>
 </head>
 <body>
-    <h1><%= content.header%></h1>
-    <p><%= content.content%></p>
-    <button class = "btn btn-danger", type="button"> Test </button>
+<div class = "wrapper">
+
+
+    <!--SideBar-->
+    <div id = "sidebar-wrapper">
+        <ul class = "sidebar-nav">
+            <li>  <span class = "glyphicon glyphicon-home" </li>
+            <li>  <span class = "glyphicon glyphicon-home" </li>
+            <li>  <span class = "glyphicon glyphicon-home" </li>
+        </ul>
+    </div>
+
+    <div class = " container-fluid " id = "page-content-wrapper">
+
+        <div class = "container-fluid template_card" id = "main_area">
+            <h1 class = "fancy template_padding center_text">FITWORK </h1>
+        </div>
+
+        <div class = "container-fluid template_card" id = "main_area">
+            <div class = "template_padding">
+               <span class = "glyphicon glyphicon-home" </li> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            </div>
+        </div>
+
+        <div class = "container-fluid template_card" id = "main_area">
+            <div class = "template_padding">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -127,6 +127,7 @@
       "resolved": "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz",
       "version": "0.5.2"
     },
+    "glyphicons": "^0.2.0",
     "http-errors": {
       "dependencies": {
         "depd": {

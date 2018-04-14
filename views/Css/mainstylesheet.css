@@ -4,6 +4,18 @@ body{
     /*background-color: #22264b;*/
 }
 
+/*ANIMATION STUFF*/
+@keyframes drop {
+    0%{opacity: 0}
+    70%{ transform: translateY(1050px)}
+    100%{transform: translateY(850px); opacity: 0.9;}
+}
+@keyframes rise {
+    0%{opacity: 0}
+    70%{ transform: translateY(-700px)}
+    100%{transform: translateY(-680px); opacity: 0.9;}
+}
+
 #main_area {
     background-color: #f1f1f1;
     position: relative;
@@ -13,6 +25,102 @@ body{
     top: -800px;
     animation: drop 1s ease forwards;
 }
+
+
+/* TEMPLATES FOR EASE OF USE */
+
+.template_card {
+    margin-top: 1.5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.template_card:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.template_padding {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.center_text{
+    text-align: center;
+}
+
+
+
+
+/*Sidebar CSS */
+#sidebar-wrapper {
+    z-index:1;
+    position: absolute;
+    width: 250px;
+    height: 100%;
+    overflow-y: hidden;
+    background: #2C3E50;
+    opacity: 0.9;
+}
+
+#page-content-wrapper{
+    width: 100%;
+    position: absolute;
+    padding-left: 250px;
+}
+
+
+.sidebar-nav{
+    padding:0;
+    list-style: none;
+}
+
+.sidebar-nav li{
+    text-indent: 40%;
+    line-height: 100px;
+}
+
+.sidebar-nav li span{
+    display:block;
+    text-decoration: none;
+    color: #ddd;
+}
+
+.sidebar-nav ul li span:hover{
+    background: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #registration_area {
     background-color: #f1f1f1;
     position: relative;
@@ -60,6 +168,7 @@ body{
     transition: 0.3s;
 }
 
+
 .cardEffect:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
@@ -94,16 +203,4 @@ body{
 
 .btn-warning:hover , .btn-warning:active, .btn-warning:visited{
     background-color: #854210; !important;
-}
-
-/*ANIMATION STUFF*/
-@keyframes drop {
-    0%{opacity: 0}
-    70%{ transform: translateY(1050px)}
-    100%{transform: translateY(900px); opacity: 0.9;}
-}
-@keyframes rise {
-    0%{opacity: 0}
-    70%{ transform: translateY(-700px)}
-    100%{transform: translateY(-680px); opacity: 0.9;}
 }
