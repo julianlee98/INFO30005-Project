@@ -1,5 +1,5 @@
 body{
-    background-image: url("Images/bg.jpg");
+    background-image: url("/link_images/bg.jpg");
     overflow:hidden;
     /*background-color: #22264b;*/
 }
@@ -16,27 +16,46 @@ body{
     100%{transform: translateY(-680px); opacity: 0.9;}
 }
 
-#main_area {
+/* TEMPLATES FOR EASE OF USE */
+
+.basic_card {
     background-color: #f1f1f1;
     position: relative;
     opacity: 0.8;
-    width: 60%;
+    width: 75%;
     height: 45%;
+    margin-top: 1.5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
     top: -800px;
-    animation: drop 1s ease forwards;
+}
+.basic_card:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.cardcontainer{
+    position: relative;
+    width: 75%;
+    height: 45%;
+    margin-top: 1.5%;
+    transition: 0.3s;
+    top: -800px;
+    padding:0px;
+}
 
-/* TEMPLATES FOR EASE OF USE */
-
-.template_card {
+/*GOES IN CONTAINERS*/
+.container_card{
+    background-color: #f1f1f1;
+    position: relative;
+    opacity: 0.9;
+    height: 100%;
     margin-top: 1.5%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
 
-.template_card:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.no_pad{
+    padding:2px;
 }
 
 .template_padding {
@@ -48,6 +67,11 @@ body{
     text-align: center;
 }
 
+.dropdown{
+    top: -800px;
+    animation: drop 1s ease forwards;
+}
+
 
 
 
@@ -55,17 +79,17 @@ body{
 #sidebar-wrapper {
     z-index:1;
     position: absolute;
-    width: 250px;
+    width: 200px;
     height: 100%;
     overflow-y: hidden;
-    background: #2C3E50;
+    background: #494d51;
     opacity: 0.9;
 }
 
 #page-content-wrapper{
     width: 100%;
     position: absolute;
-    padding-left: 250px;
+    padding-left: 200px;
 }
 
 
@@ -75,18 +99,34 @@ body{
 }
 
 .sidebar-nav li{
-    text-indent: 40%;
-    line-height: 100px;
+    text-indent: 30%;
+    line-height: 20vh;
+    border-style: solid;
+    border-width: 1px;
 }
 
-.sidebar-nav li span{
-    display:block;
-    text-decoration: none;
-    color: #ddd;
+.sidebar-nav li:hover{
+    background-color: #ff751a;
+    transition: 0.4s;
 }
 
-.sidebar-nav ul li span:hover{
-    background: black;
+.sidebar-nav a{
+    color: #494d51;
+}
+
+.sidebar-nav li.active{
+    background-color: #ff751a;
+}
+
+
+#main_area {
+    background-color: #f1f1f1;
+    position: relative;
+    opacity: 0.8;
+    width: 60%;
+    height: 45%;
+    top: -800px;
+    animation: drop 1s ease forwards;
 }
 
 
@@ -120,6 +160,10 @@ body{
 
 
 
+
+
+
+/* COMING SOON PAGE  */
 
 #registration_area {
     background-color: #f1f1f1;
