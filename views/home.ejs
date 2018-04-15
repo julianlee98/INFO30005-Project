@@ -19,14 +19,14 @@
     </script>
 </head>
 <body>
-<div class = "wrapper">
 
+<div class = "wrapper">
 
     <!--SideBar-->
     <div id = "sidebar-wrapper">
         <ul class = "sidebar-nav">
             <a href="home" title="Home">
-                <li class="active"><img src="/link_images/home.png" width="30%" height="30%"></li>
+                <li class="active" ><img src="/link_images/home.png" width="30%" height="30%"></li>
             </a>
             <a href="profile" title="Profile">
                 <li><img src="/link_images/user.png" width="30%" height="30%"></li>
@@ -43,40 +43,101 @@
         </ul>
     </div>
 
-    <div class = " container-fluid " id = "page-content-wrapper">
 
+    <!--Newsfeed Content-->
+    <div id = "page-content-wrapper">
 
-        <div class = "container-fluid cardcontainer dropdown">
-            <div class = "col-sm-3 no_pad">
-                <div class = "col-sm-12 container_card">
-                    <img src="/link_images/home.png">
+        <!--Searchbar-->
+        <div class="search-bar container-fluid center_text">
+            <input type="text" name="search" placeholder="Search...">
+        </div>
+
+        <!--Make a Post-->
+        <div class = "container-fluid basic_card dropdown template_padding">
+            <div class="post-options">
+                <button class="col-sm-3 btn-default" type="button">Make Post</button>
+                <button class="col-sm-3 btn-default" type="button">Photo/Video</button>
+                <button class="col-sm-3 btn-default" type="button">Update Progress</button>
+                <button class="col-sm-3 btn-default" type="button">Playlist</button>
+            </div>
+            <textarea class="text-box" form="user-form"></textarea>
+
+        </div>
+
+        <div class = "container-fluid cardcontainer dropdown row-eq-height">
+
+            <div class = "col-sm-2 no_pad">
+                <div class = "col-sm-12 container_card center_text">
+                    <img class="profile-picture" src="/link_images/user.png">
+                    <div>Jeff Tong</div>
                 </div>
             </div>
-            <div class = "col-sm-9 no_pad">
-                <div class = "col-sm-12 container_card">
-                    astracted by the readable content of a page  It is a long established fact that a reader will be distracted by the readable content of a page It is a long established fact that a reader will be distracted by the readable content of a page It is a long established fact that a reader will be distracted by the readable content of a page It is a long established fact that a reader will be distracted by the readable content of a page
+
+            <div class = "col-sm-10 no_pad">
+                <div class = "col-sm-12 container_card template_padding">
+                    <p>
+                    It is a long established fact that a reader will be distracted by the readable content of a page when
+                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                    of letters, as opposed to using 'Content here, content here', making it look like readable English. Many
+                    desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+                    search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have
+                    evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    It is a long established fact that a reader will be distracted by the readable content of a page when
+                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                    of letters, as opposed to using 'Content here, content here', making it look like readable English. Many
+                    desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+                    search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have
+                    evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    </p>
+
+                    <p class="likes">
+                        Liked by 3 people
+                    </p>
+
+                    <div class="post-interaction">
+                        <button class="col-sm-3 btn-default" type="button">Like</button>
+                        <button class="col-sm-3 btn-default" type="button">Comment</button>
+                        <button class="col-sm-3 btn-default" type="button">Share</button>
+                        <button class="col-sm-3 btn-default" type="button">View Comments</button>
+                    </div>
                 </div>
             </div>
 
         </div>
 
+        <div class = "container-fluid cardcontainer dropdown row-eq-height">
 
-
-        <div class = "container-fluid basic_card dropdown">
-            <h1 class = "fancy template_padding center_text">FITWORK </h1>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class = "template_padding">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            <div class = "col-sm-2 no_pad">
+                <div class = "col-sm-12 container_card center_text">
+                    <img class="profile-picture" src="/link_images/user.png">
+                    <div>Jeff Tong</div>
+                </div>
             </div>
+
+            <div class = "col-sm-10 no_pad">
+                <div class = "col-sm-12 container_card template_padding">
+
+                    <img class="image template_padding" src="/link_images/004-polished-wood.png">
+                    <p>
+                        It is a long established fact that a reader will be distracted by the readable content of a page
+                        when looking at its layout.
+                    </p>
+
+                    <p class="likes">
+                        Liked by 3 people
+                    </p>
+
+                    <div class="post-interaction">
+                        <button class="col-sm-3 btn-default" type="button">Like</button>
+                        <button class="col-sm-3 btn-default" type="button">Comment</button>
+                        <button class="col-sm-3 btn-default" type="button">Share</button>
+                        <button class="col-sm-3 btn-default" type="button">View Comments</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class = "container-fluid basic_card dropdown">
-            <div class = "template_padding">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-            </div>
-        </div>
 
         <div class="container-fluid cardcontainer dropdown">
             <div class = "col-sm-6 no_pad">
@@ -99,96 +160,6 @@
                 <p> iausndaiousdnasdasidonasdnasoi </p>
             </div>
         </div>
-
-
-        <div class = "container-fluid cardcontainer dropdown">
-            <div class = "col-sm-4 no_pad">
-                <div class = "col-sm-12 container_card">
-                    Test
-                </div>
-            </div>
-            <div class = "col-sm-4 no_pad">
-                <div class = "col-sm-12 container_card">
-                    Test
-                </div>
-            </div>
-            <div class = "col-sm-4 no_pad">
-                <div class = "col-sm-12 container_card">
-                    Test
-                </div>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-        <div class = "container-fluid basic_card dropdown">
-            <div class =  "template_padding">
-                <b> test</b>
-                <p> iausndaiousdnasdasidonasdnasoi </p>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
 
     </div>
 </div>
