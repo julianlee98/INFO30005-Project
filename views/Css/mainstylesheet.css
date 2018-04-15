@@ -86,6 +86,10 @@ body{
     animation: drop 1s ease forwards;
 }
 
+/*.position-left {*/
+    /*left: 12.5%;*/
+/*}*/
+
 .profile-picture {
     border-radius: 50%;
     border: gray solid;
@@ -93,6 +97,26 @@ body{
     width: 100px;
     margin: 10px 0 5px 0;
 
+}
+
+.progress-list {
+    list-style: disc;
+}
+
+.follow-request img {
+    border-radius: 50%;
+    border: gray solid;
+    height: 50px;
+    width: 50px;
+}
+
+.follow-request p {
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+
+.follow-request button {
+    margin: 0 0 0 5px;
 }
 
 .image {
@@ -121,10 +145,10 @@ textarea {
     outline-color: gray;
     padding: 5px 5px 5px 5px;
 }
-.likes {
+
+.post-meta {
     color: dimgrey;
 }
-
 
 
 /*Sidebar CSS */
