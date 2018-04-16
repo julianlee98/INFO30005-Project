@@ -15,7 +15,47 @@
 
     <script>
         $(document).ready(function(){
+            $("#make_post").click(function(){
+                var status = $("#user_input").val();
+                var html_to_add;
+                    html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
+                    " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
+                    " </div>\n" +
+                    " </div>\n" +
+                    " <div class='col-sm-10 no_pad'>\n" +
+                    " <div class='col-sm-12 container_card template_padding'><p>\n" +
+                    " {1}" +
+                    " </p>\n" +
+                    " <div class='post-meta'>\n" +
+                    " <p>Liked by 3 people</p>\n" +
+                    " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
+                    " <div class='post-interaction'>\n" +
+                    " <button class='col-sm-3 btn-default' type='button'>Like</button><button class='col-sm-3 btn-default' type='button'>Comment</button><button class='col-sm-3 btn-default' type='button'>Share</button><button class='col-sm-3 btn-default' type='button'>View Comments</button></div>\n" +
+                    " </div>\n" +
+                    " </div>\n" +
+                    " </div>", status);
+                $("#post_creation").after(html_to_add);
+            });
         });
+
+        //https://www.sitepoint.com/jquery-string-template-format-function/
+        var JQUERY4U = {};
+        JQUERY4U.UTIL = {
+            formatVarString: function()
+            {
+                var args = [].slice.call(arguments);
+                if(this.toString() != '[object Object]')
+                {
+                    args.unshift(this.toString());
+                }
+
+                var pattern = new RegExp('{([1-' + args.length + '])}','g');
+                return String(args[0]).replace(pattern, function(match, index) { return args[index]; });
+            }
+        }
+        JQUERY4U.UTIL.formatVarString('{1} is a {2} aimed to help you learn {3}.', 'jQuery4u', 'blog', 'jQuery');
+        //output: "jQuery4u is a blog aimed to help you learn jQuery.
+
     </script>
 </head>
 <body>
@@ -48,31 +88,44 @@
     <div id = "page-content-wrapper">
 
         <!--Searchbar-->
-        <div class="search-bar container-fluid center_text">
-            <input type="text" name="search" placeholder="Search...">
+        <!--<div class="search-bar container-fluid center_text dropdown">-->
+            <!--<div class = "col-sm-1">-->
+                 <!--<img src=""-->
+            <!--</div>-->
+            <!--<div class = "col-sm-11">-->
+                <!--<input type="text" name="search" placeholder="Search...">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="container-fluid cardcontainer dropdown">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">Search</button>
+          </span>
+            </div>
         </div>
 
         <!--Sort By-->
 
-        <!--<div class="dropdown position-left">-->
-            <!--<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">-->
-                <!--Sort By <span class="caret"></span>-->
-            <!--</button>-->
-            <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="#">Workouts</a></li>-->
-                <!--<li><a href="#">Progress</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
+        <div class="dropdown sort_by">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                Sort By <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Workouts</a></li>
+                <li><a href="#">Progress</a></li>
+            </ul>
+        </div>
 
         <!--Make a Post-->
-        <div class = "container-fluid basic_card dropdown template_padding">
+        <div class = "container-fluid basic_card dropdown template_padding" id = "post_creation">
             <div class="post-options">
-                <button class="col-sm-3 btn-default" type="button">Make Post</button>
-                <button class="col-sm-3 btn-default" type="button">Photo/Video</button>
-                <button class="col-sm-3 btn-default" type="button">Update Progress</button>
-                <button class="col-sm-3 btn-default" type="button">Playlist</button>
+                <button class="col-sm-3 btn-default" type="button" id = "make_post">Make Post</button>
+                <button class="col-sm-3 btn-default" type="button" id = "photo_vid">Photo/Video</button>
+                <button class="col-sm-3 btn-default" type="button" id = "progress">Update Progress</button>
+                <button class="col-sm-3 btn-default" type="button" id = "playlist">Playlist</button>
             </div>
-            <textarea class="text-box" form="user-form"></textarea>
+            <textarea class="form-control" rows="5" id = "user_input"></textarea>
 
         </div>
 
@@ -89,7 +142,7 @@
         </div>
 
         <!--Example posts-->
-        <div class="container-fluid cardcontainer dropdown row-eq-height">
+        <div class="container-fluid cardcontainer dropdown norm_posts row-eq-height">
 
             <div class="col-sm-2 no_pad">
                 <div class="col-sm-12 container_card center_text">
