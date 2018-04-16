@@ -4,6 +4,10 @@ module.exports.mainContent = function(req, res){
   res.send(dbContent);
 };
 
+module.exports.loginPage  = function (req, res) {
+    res.render('login', {content: dbContent[0]});
+};
+
 module.exports.homePage = function (req,res) {
     res.render('home', {content: dbContent[0]});
 };
