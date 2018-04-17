@@ -121,6 +121,7 @@ body{
 
 .fix{
     max-height: 60%;
+    overflow-y: scroll;
 }
 
 .no_pad{
@@ -353,7 +354,7 @@ hr {
 .col-xs-4 {
     padding-top: 18px;
     background-color: rgba(241, 241, 241, 0.8);
-    max-height: 163px;
+    max-height: 169px;
     max-width: 270px;
 }
 
