@@ -15,6 +15,16 @@
 
     <script>
         $(document).ready(function(){
+            $(".btn_follow").click(function () {
+                $(".btn_follow").toggleClass("btn_focus");
+                $(".btn_follow").toggleClass("make_btn_orange");
+                if($(".btn_follow").text() == "Following"){
+                    $(".btn_follow").text("Follow");
+                }
+                else{
+                    $(".btn_follow").text("Following");
+                }
+            });
         });
     </script>
 </head>
@@ -72,9 +82,26 @@
                             -Arnold schwarzenegger
                         </i>
                     </p>
+
+                    <button type = "button" class =" btn btn-default btn_follow"> Follow </button>
                 </div>
             </div>
 
+        </div>
+
+        <div class="container-fluid cardcontainer dropdown norm_posts row-eq-height">
+
+            <div class="col-sm-6 no_pad">
+                <div class="col-sm-12 container_card template_padding center_text">
+                    Followers: 10
+                </div>
+            </div>
+
+            <div class="col-sm-6 no_pad">
+                <div class="col-sm-12 container_card template_padding center_text">
+                    Following: 20
+                </div>
+            </div>
         </div>
 
         <div class = "container-fluid basic_card_scroll dropdown template_padding">

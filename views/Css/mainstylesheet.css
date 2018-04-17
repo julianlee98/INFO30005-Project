@@ -383,6 +383,14 @@ textarea {
     text-align: right;
 }
 
+.btn_follow{
+    margin-top: 1%;
+}
+
+.btn_focus:focus{
+    background-color: #ff751a;
+}
+
 .make_btn_orange{
     background-color: #ff751a;
 }
