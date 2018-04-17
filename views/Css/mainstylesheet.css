@@ -95,7 +95,27 @@ body{
 
 .log-in-form {
     padding-top: 10px;
+    margin-bottom: 20%;
 }
+
+.sign-up-button {
+    padding-left: 15px;
+    margin-bottom: 20%;
+}
+
+.offering {
+    margin: 15% 10% 10% 10%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.offering img {
+    height: 15%;
+    width: 15%;
+    padding-right: 20px;
+}
+
+
 
 /*Sidebar CSS */
 #sidebar-wrapper {
