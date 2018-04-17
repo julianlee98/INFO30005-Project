@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require("../controllers/testDb Controller");
 
+router.get('/', controller.loginPage);
 router.get('/login', controller.loginPage);
 router.get('/home', controller.homePage);
 router.get('/settings', controller.settingsPage);
