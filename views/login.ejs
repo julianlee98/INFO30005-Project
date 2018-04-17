@@ -21,7 +21,7 @@
 <body>
 <div class = "wrapper">
     <div class = " container-fluid">
-        <div class = "container-fluid login-container dropdown row-eq-height">
+        <div class = "container-fluid login-container dropdown_login row-eq-height">
 
             <div class = "col-sm-7 no_pad">
 
@@ -37,27 +37,30 @@
             </div>
 
             <div class = "col-sm-5 no_pad">
-                <div class = "col-sm-12 container_card">
+                <div class = "col-sm-12 container_card login_padding">
                     <!--Log in form-->
                     <form class="log-in-form">
                         <div class="form-row">
                             <!--Email log in-->
                             <div class="form-group col-sm-5">
-                                <label class="sr-only" for="logInEmail">Email Address</label>
+                                <label>Email Address</label>
                                 <input type="email" class="form-control" id="logInEmail" placeholder="Enter email">
                             </div>
                             <!--Password log in-->
-                            <div class="form-group col-sm-5 pl-0">
-                                <label class="sr-only" for="logInPassword">Password</label>
+                            <div class="form-group col-sm-5">
+                                <label>Password</label>
                                 <input type="password" class="form-control" id="logInPassword" placeholder="Password">
                             </div>
                             <!--Log in button-->
-                            <div class="col-sm-2 pl-0">
-                                 <a type="button" class="btn btn-primary" href="\home">Log in</a>
+                            <div class="col-sm-2 btn_fix">
+                                 <a type="button" class="btn btn-primary make_btn_orange" href="\home">Log in</a>
                             </div>
                         </div>
                     </form>
 
+                    <hr>
+                    <div class = "text-center"> <h1> OR </h1> </div>
+                    <hr>
                     <h2 class="col-sm-12">Sign Up</h2>
                     <!--Sign up form-->
                     <div class="sign-up-form">
@@ -96,7 +99,7 @@
                             </div>
 
                             <div class="button">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary make_btn_orange">Submit</button>
                             </div>
                         </form>
                     </div>

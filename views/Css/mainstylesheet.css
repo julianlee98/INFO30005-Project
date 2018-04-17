@@ -18,6 +18,12 @@ body{
     100%{transform: translateY(60px); rgba(241, 241, 241, 0.8);}
 }
 
+@keyframes drop_login {
+    0%{rgba(241, 241, 241, 0);}
+    70%{ transform: translateY(950px)}
+    100%{transform: translateY(870px); rgba(241, 241, 241, 0.8);}
+}
+
 
 @keyframes rise {
     0%{opacity: 0}
@@ -151,6 +157,11 @@ body{
     position: static;
     z-index: 5000;
 }
+
+.dropdown_login{
+    top: -800px;
+    animation: drop_login 1s ease forwards;
+}
 /* Login Styles */
 
 .row-eq-height {
@@ -167,6 +178,14 @@ body{
     transition: 0.3s;
     top: -800px;
     padding:0px;
+}
+
+.login_padding{
+    padding-top:8%;
+}
+
+.btn_fix{
+    padding-top: 3.2%;
 }
 
 .pl-0 {
@@ -362,6 +381,10 @@ textarea {
 .sub{
     margin-top: 0.5%;
     text-align: right;
+}
+
+.make_btn_orange{
+    background-color: #ff751a;
 }
 
 #post_creation ul li a {
