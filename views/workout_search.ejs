@@ -5,17 +5,20 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/jquery/jquery.js"></script>
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="myCss/mainstylesheet.css" />
     <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Metrophobic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
+    <link href ="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel= "stylesheet">
     <meta charset = "UTF-8">
     <title>Workout Search</title>
 
 
     <script>
-        $(document).ready(function(){
-        });
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
     </script>
 </head>
 <body>
@@ -34,7 +37,101 @@
     </div>
 
     <div class = " container-fluid " id = "page-content-wrapper">
+        <div class="container-fluid basic_card dropdown template_padding">
+            <div class = "major_title"> <b>Workout Search:</b> </div>
+        </div>
+        <div class="container-fluid basic_card dropdown">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Workout name</th>
+                    <th>Intensity</th>
+                    <th>Muscle groups</th>
+                    <th>Duration</th>
+                    <th>Difficulty</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Julian Lee</td>
+                    <td>After work arms</td>
+                    <td>Medium</td>
+                    <td>Biceps, Triceps</td>
+                    <td>50 mins</td>
+                    <td>Beginner</td>
+                    <td> 8 </td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Leg city</td>
+                    <td>High</td>
+                    <td>Calves, Quads</td>
+                    <td>30 mins</td>
+                    <td>Intermediate</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Leg city</td>
+                    <td>High</td>
+                    <td>Calves, Quads</td>
+                    <td>30 mins</td>
+                    <td>Advanced</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Leg city</td>
+                    <td>High</td>
+                    <td>Calves, Quads</td>
+                    <td>30 mins</td>
+                    <td>Beginner</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>Usain Bolt</td>
+                    <td>Training for marathon</td>
+                    <td>High</td>
+                    <td>Calves, Quads, Stamina</td>
+                    <td>2 hours</td>
+                    <td>Advanced</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Mike Stevens</td>
+                    <td>First training program</td>
+                    <td>Low</td>
+                    <td>Arms</td>
+                    <td>30 mins</td>
+                    <td>Beginner</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Leg city</td>
+                    <td>High</td>
+                    <td>Calves, Quads</td>
+                    <td>30 mins</td>
+                    <td>Intermediate</td>
+                    <td>9</td>
+                </tr>
 
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>User</th>
+                    <th>Workout name</th>
+                    <th>Intensity</th>
+                    <th>Muscle groups</th>
+                    <th>Duration</th>
+                    <th>Difficulty</th>
+                    <th>Rating</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
 </body>

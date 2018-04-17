@@ -1,6 +1,7 @@
 body{
     background-image: url("/link_images/bg.jpg");
-    overflow:scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     /*background-color: #22264b;*/
 }
 
@@ -419,11 +420,9 @@ hr {
 }
 
 
-
-
-
-
-
+.major_title{
+    font-size: 30px;
+}
 
 
 
