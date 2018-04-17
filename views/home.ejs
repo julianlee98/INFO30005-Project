@@ -15,7 +15,7 @@
 
     <script>
         $(document).ready(function(){
-            $("#make_post").click(function(){
+            $("#sub_make_post").click(function(){
                 var status = $("#user_input").val();
                 var html_to_add;
                     html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
@@ -30,11 +30,71 @@
                     " <p>Liked by 3 people</p>\n" +
                     " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
                     " <div class='post-interaction'>\n" +
-                    " <button class='col-sm-3 btn-default' type='button'>Like</button><button class='col-sm-3 btn-default' type='button'>Comment</button><button class='col-sm-3 btn-default' type='button'>Share</button><button class='col-sm-3 btn-default' type='button'>View Comments</button></div>\n" +
+                    " <div class='btn-group btn-group-justified'> <a href='#' class='btn btn-default'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
                     " </div>\n" +
                     " </div>\n" +
                     " </div>", status);
                 $("#post_creation").after(html_to_add);
+            });
+
+            $(document).on('change', '.btn-file :file', function() {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function(event, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if( input.length ) {
+                    input.val(log);
+                } else {
+                    if( log ) alert(log);
+                }
+
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#imgInp").change(function(){
+                readURL(this);
+            });
+
+            $("#sub_post_photo").click(function(){
+                var status = $("#photo_description").val();
+                var html_to_add;
+                html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
+                    " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
+                    " </div>\n" +
+                    " </div>\n" +
+                    " <div class='col-sm-10 no_pad'>\n" +
+                    " <div class='col-sm-12 container_card template_padding'><p>\n" +
+                    " {1}" +
+                    " </p>\n" +
+                    " <div class='post-meta'>\n" +
+                    " <p>Liked by 3 people</p>\n" +
+                    " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
+                    " <div class='post-interaction'>\n" +
+                    " <div class='btn-group btn-group-justified'> <a href='#' class='btn btn-default'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
+                    " </div>\n" +
+                    " </div>\n" +
+                    " </div>", status);
+                $("#post_creation").after(html_to_add)  ;
+            });
+
+            $("#friend").click(function(){
+               $(".follow-request").hide();
             });
         });
 
@@ -86,16 +146,6 @@
 
     <!--Newsfeed Content-->
     <div id = "page-content-wrapper">
-
-        <!--Searchbar-->
-        <!--<div class="search-bar container-fluid center_text dropdown">-->
-            <!--<div class = "col-sm-1">-->
-                 <!--<img src=""-->
-            <!--</div>-->
-            <!--<div class = "col-sm-11">-->
-                <!--<input type="text" name="search" placeholder="Search...">-->
-            <!--</div>-->
-        <!--</div>-->
         <div class="container-fluid cardcontainer dropdown">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for...">
@@ -108,7 +158,7 @@
         <!--Sort By-->
 
         <div class="dropdown sort_by">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
                 Sort By <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -119,15 +169,106 @@
 
         <!--Make a Post-->
         <div class = "container-fluid basic_card dropdown template_padding" id = "post_creation">
-            <div class="post-options">
-                <button class="col-sm-3 btn-default" type="button" id = "make_post">Make Post</button>
-                <button class="col-sm-3 btn-default" type="button" id = "photo_vid">Photo/Video</button>
-                <button class="col-sm-3 btn-default" type="button" id = "progress">Update Progress</button>
-                <button class="col-sm-3 btn-default" type="button" id = "playlist">Playlist</button>
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#make_post">Make Post</a></li>
+                <li><a data-toggle="tab" href="#photo_video">Photo/Video</a></li>
+                <li><a data-toggle="tab" href="#update_progress">Update Progress</a></li>
+                <li><a data-toggle="tab" href="#playlist">Playlist</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                <!--Tab 1-->
+                <div id="make_post" class="tab-pane fade in active">
+                    <div class = "sub_title"><b> Make post: </b></div>
+                    <div class = "form-group variable_section text-right">
+                        <textarea class="form-control" rows="5" id = "user_input"></textarea>
+                        <button type="submit" class="btn btn-default sub" id = "sub_make_post">Submit</button>
+                    </div>
+                </div>
+
+                <!--Tab 2-->
+                <div id="photo_video" class="tab-pane fade">
+                    <div class="form-group">
+                        <label>Upload image:</label>
+                        <div class="input-group">
+                        <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse… <input type="file" id="imgInp">
+                             </span>
+                        </span>
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <img id='img-upload'/>
+                    </div>
+                    <div> Add a comment: </div>
+                    <div class = "form-group text-right">
+                        <textarea class="form-control" rows="5" id = "photo_description"></textarea>
+                        <button type="submit" class="btn btn-default sub" id = "sub_post_photo">Submit</button>
+                    </div>
+                </div>
+
+                <!--Tab 3-->
+                <div id="update_progress" class="tab-pane fade">
+                    <div class="form-group">
+                        <label for="sel1">Select workout:</label>
+                        <select class="form-control" id="sel1">
+                            <option>Monday legs</option>
+                            <option>Everyday arms</option>
+                            <option>Cardio city</option>
+                            <option>My legs hurt so much</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class = "col-sm-4">
+                            <div class="form-group">
+                                <label>Squats</label><br>
+                                <input type="text" size="2" class="form-control upda" placeholder="New PR" />
+                            </div>
+                        </div>
+                        <div class = "col-sm-4">
+                            <div class="form-group">
+                                <label>Leg Press</label><br>
+                                <input type="text" size="2" class="form-control upda" placeholder="New PR" />
+                            </div>
+                        </div>
+                        <div class = "col-sm-4">
+                            <div class="form-group">
+                                <label>Deadlifts</label><br>
+                                <input type="text" size="2" class="form-control upda" placeholder="New PR" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "form-group variable_section text-right">
+                        <button type="submit" class="btn btn-default sub" id = "sub_post_update">Submit</button>
+                    </div>
+                </div>
+
+                <!--Tab 4-->
+                <div id="playlist" class="tab-pane fade">
+                    <div class = "sub_title"><b> New playlist: </b></div>
+                    <div class = "form-group variable_section text-right">
+                        <textarea class="form-control" rows="5" id = "playlist_input"></textarea>
+                        <button type="submit" class="btn btn-default sub" id = "sub_post_playlist">Submit</button>
+                    </div>
+                </div>
             </div>
-            <textarea class="form-control" rows="5" id = "user_input"></textarea>
 
         </div>
+        <!--<div class = "container-fluid basic_card dropdown template_padding" id = "post_creation">-->
+            <!--<div class="btn-group btn-group-justified post_options">-->
+                <!--<a href="#" class="btn btn-default" id ="make_post">Make Post</a>-->
+                <!--<a href="#" class="btn btn-default" id = "photo_vid"> Photo/Video</a>-->
+                <!--<a href="#" class="btn btn-default" id = "update">Update Progress</a>-->
+                <!--<a href="#" class="btn btn-default" id = "playlist">Playlist</a>-->
+            <!--</div>-->
+            <!--<div class = "form-group variable_section text-right">-->
+             <!--<textarea class="form-control" rows="5" id = "user_input"></textarea>-->
+                <!--<button type="submit" class="btn btn-primary sub" id = "sub_make_post">Submit</button>-->
+            <!--</div>-->
+
+        <!--</div>-->
 
         <!--Follow request example-->
         <div class="container-fluid basic_card dropdown follow-request">
@@ -136,8 +277,8 @@
                 <p>
                     John Smith wants to follow you
                 </p>
-                <button class="btn-default" type="button">✓</button>
-                <button class="btn-default" type="button">✗</button>
+                <button class="btn btn-default" type="button" id ="friend">✓</button>
+                <button class="btn btn-default" type="button" id = "friend">✗</button>
             </div>
         </div>
 
@@ -173,11 +314,11 @@
                         <p><time datetime="2018-4-15 08:00">4 February 2018 8:00AM</time></p>
                     </div>
 
-                    <div class="post-interaction">
-                        <button class="col-sm-3 btn-default" type="button">Like</button>
-                        <button class="col-sm-3 btn-default" type="button">Comment</button>
-                        <button class="col-sm-3 btn-default" type="button">Share</button>
-                        <button class="col-sm-3 btn-default" type="button">View Comments</button>
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn btn-default">Like</a>
+                        <a href="#" class="btn btn-default">Comment</a>
+                        <a href="#" class="btn btn-default">Share</a>
+                        <a href="#" class="btn btn-default">View Comments</a>
                     </div>
                 </div>
             </div>
@@ -207,11 +348,11 @@
                         <p><time datetime="2018-4-15 08:00">4 February 2018 8:00AM</time></p>
                     </div>
 
-                    <div class="post-interaction">
-                        <button class="col-sm-3 btn-default" type="button">Like</button>
-                        <button class="col-sm-3 btn-default" type="button">Comment</button>
-                        <button class="col-sm-3 btn-default" type="button">Share</button>
-                        <button class="col-sm-3 btn-default" type="button">View Comments</button>
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn btn-default">Like</a>
+                        <a href="#" class="btn btn-default">Comment</a>
+                        <a href="#" class="btn btn-default">Share</a>
+                        <a href="#" class="btn btn-default">View Comments</a>
                     </div>
                 </div>
             </div>
@@ -241,11 +382,11 @@
                         <p>Liked by 3 people</p>
                         <p><time datetime="2018-4-15 08:00">4 February 2018 8:00AM</time></p>
                     </div>
-                    <div class="post-interaction">
-                        <button class="col-sm-3 btn-default" type="button">Like</button>
-                        <button class="col-sm-3 btn-default" type="button">Comment</button>
-                        <button class="col-sm-3 btn-default" type="button">Share</button>
-                        <button class="col-sm-3 btn-default" type="button">View Comments</button>
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn btn-default">Like</a>
+                        <a href="#" class="btn btn-default">Comment</a>
+                        <a href="#" class="btn btn-default">Share</a>
+                        <a href="#" class="btn btn-default">View Comments</a>
                     </div>
                 </div>
             </div>
@@ -275,11 +416,11 @@
                         <p>Liked by 3 people</p>
                         <p><time datetime="2018-4-15 08:00">4 February 2018 8:00AM</time></p>
                     </div>
-                    <div class="post-interaction">
-                        <button class="col-sm-3 btn-default" type="button">Like</button>
-                        <button class="col-sm-3 btn-default" type="button">Comment</button>
-                        <button class="col-sm-3 btn-default" type="button">Share</button>
-                        <button class="col-sm-3 btn-default" type="button">View Comments</button>
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn btn-default">Like</a>
+                        <a href="#" class="btn btn-default">Comment</a>
+                        <a href="#" class="btn btn-default">Share</a>
+                        <a href="#" class="btn btn-default">View Comments</a>
                     </div>
                 </div>
             </div>

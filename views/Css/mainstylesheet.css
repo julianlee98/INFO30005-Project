@@ -13,8 +13,8 @@ body{
 
 @keyframes dropnew {
     0%{rgba(241, 241, 241, 0);}
-    70%{ transform: translateY(370px)}
-    100%{transform: translateY(310px); rgba(241, 241, 241, 0.8);}
+    70%{ transform: translateY(80px)}
+    100%{transform: translateY(60px); rgba(241, 241, 241, 0.8);}
 }
 
 @keyframes rise {
@@ -38,6 +38,9 @@ body{
     padding: 5px 0 5px 25px;
 }
 
+.post_options{
+    padding-bottom: 1%;
+}
 
 /* TEMPLATES FOR EASE OF USE */
 
@@ -94,7 +97,7 @@ body{
 }
 
 .dropdown_newitem{
-    top: -300px;
+    top: -50px;
     animation: dropnew 1s ease forwards;
 }
 
@@ -105,6 +108,7 @@ body{
 
 .sort_by {
     left: 12.5%;
+    margin-top: 0.2%;
 }
 
 
@@ -223,12 +227,52 @@ textarea {
     animation: drop 1s ease forwards;
 }
 
+.variable_section{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0.4%;
+}
 
+.sub{
+    margin-top: 0.5%;
+    text-align: right;
+}
 
+#post_creation ul li a {
+    color: black;
+}
 
+#post_creation ul li.active a{
+    background-color: #FF8E19;
+}
 
+.tab-content{
+    padding-top: 1%;
+}
 
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
 
+#img-upload{
+    width: 100%;
+}
 
 
 
