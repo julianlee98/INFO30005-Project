@@ -25,16 +25,149 @@
     <!--SideBar-->
     <div id = "sidebar-wrapper">
         <ul class = "sidebar-nav">
-            <a href="home"> <li><img src="/link_images/home.png" width="30%" height="30%">  </li> </a>
-            <a href="profile"> <li> <img src="/link_images/user.png" width="30%" height="30%">  </li> </a>
-            <a href="workout_builder"> <li class="active"> <img src="/link_images/one-dumbbell.png" width="30%" height="30%"> </li> </a>
-            <a href="workout_search"> <li>  <img src="/link_images/search.png" width="30%" height="30%"> </li> </a>
-            <a href="settings"> <li> <img src="/link_images/settings-gears.png" width="30%" height="30%"> </li>  </a>
+            <a href="home" title="Home">
+                <li><img src="/link_images/home.png" width="30%" height="30%"></li>
+            </a>
+            <a href="profile" title="Profile">
+                <li><img src="/link_images/user.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_builder" title="Workout Builder">
+                <li class="active"><img src="/link_images/one-dumbbell.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_search" title="Workout Search">
+                <li><img src="/link_images/search.png" width="30%" height="30%"></li>
+            </a>
+            <a href="settings" title="Settings">
+                <li> <img src="/link_images/settings-gears.png" width="30%" height="30%"></li>
+            </a>
         </ul>
     </div>
 
+    <!--Workout Builder-->
     <div class = " container-fluid " id = "page-content-wrapper">
-
+        <div class = "container-fluid basic_card dropdown">
+            <h1 class = "template_padding center_text">Workout Builder</h1>
+            <!--Workout Exercises-->
+            <h2 class = "template_padding col-sm-12">Exercises</h2>
+            <div class="exercise-layout">
+                <!--<form>-->
+                    <!--Exercises-->
+                    <div class="form-group col-sm-12">
+                        <label for="exercise">Exercise</label>
+                        <input type="search" class="form-control input-text"
+                               id="exercise" placeholder="Enter or search exercises">
+                    </div>
+                    <!--Sets-->
+                    <div class="form-group col-sm-12">
+                        <label for="set">Sets</label>
+                        <input type="number" class="form-control input-number" id="set">
+                    </div>
+                    <!--Repetitions-->
+                    <div class="form-group col-sm-12">
+                        <label for="repetition">Repetitions</label>
+                        <input type="number" class="form-control input-number" id="repetition">
+                    </div>
+                    <!--Rest-->
+                    <div class="form-group col-sm-12">
+                        <label for="rest">Rest (in seconds)</label>
+                        <input type="number" class="form-control input-number" id="rest">
+                    </div>
+                    <!--Add to workout-->
+                    <div class="button form-group">
+                        <button type="submit" class="btn btn-primary">Add to workout</button>
+                    </div>
+                <!--</form>-->
+            </div>
+            <!--Workout form-->
+            <h2 class = "template_padding col-sm-12">Workout Details</h2>
+            <div class="form-layout">
+                <form>
+                    <!--Gender-->
+                    <div class="col-sm-12 form-group">
+                        <div>
+                            <label for="genderToggle">Gender</label>
+                        </div>
+                        <div class="btn-group-toggle" data-toggle="buttons" id="genderToggle">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="male" autocomplete="off" checked> Male
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="female" autocomplete="off"> Female
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="any-gender" autocomplete="off"> Any
+                            </label>
+                        </div>
+                    </div>
+                    <!--Time-->
+                    <div class="form-group col-sm-12">
+                        <label for="duration">Duration (in minutes)</label>
+                        <input type="number" class="form-control input-number" id="duration">
+                    </div>
+                    <!--Tags-->
+                    <div class="form-group col-sm-12">
+                        <label for="tag">Tags</label>
+                        <input type="search" class="form-control input-text"
+                               id="tag" placeholder="Enter or search workout tags">
+                    </div>
+                    <!--Muscle Groups-->
+                    <div class="form-group col-sm-12">
+                        <label for="muscle-group">Muscle Groups</label>
+                        <input type="search" class="form-control input-text" id="muscle-group"
+                               placeholder="Enter or search muscle groups">
+                    </div>
+                    <!--Equipment-->
+                    <div class="form-group col-sm-12">
+                        <label for="Equipment">Equipment</label>
+                        <input type="search" class="form-control input-text" id="equipment"
+                               placeholder="Enter or search equipment">
+                    </div>
+                    <!--Difficulty-->
+                    <div class="col-sm-12 form-group">
+                        <div>
+                            <label for="intensityToggle">Intensity</label>
+                        </div>
+                        <div class="btn-group-toggle" data-toggle="buttons" id="difficultyToggle">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="low" autocomplete="off" checked> Low
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="moderate" autocomplete="off"> Moderate
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="vigorous" autocomplete="off"> Vigorous
+                            </label>
+                        </div>
+                    </div>
+                    <!--Difficulty-->
+                    <div class="col-sm-12 form-group">
+                        <div>
+                            <label for="difficultyToggle">Difficulty</label>
+                        </div>
+                        <div class="btn-group-toggle" data-toggle="buttons" id="difficultyToggle">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="beginner" autocomplete="off" checked> Beginner
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="intermediate" autocomplete="off"> Intermediate
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="advanced" autocomplete="off"> Advanced
+                            </label>
+                        </div>
+                    </div>
+                    <!--Workout Description-->
+                    <div class="form-group col-sm-12">
+                        <label for="workoutText">Workout Description</label>
+                        <textarea class="form-control input-text" id="aboutText" rows="3"></textarea>
+                    </div>
+                    <!--Save-->
+                    <div class="button form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

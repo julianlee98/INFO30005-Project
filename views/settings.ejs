@@ -25,16 +25,67 @@
     <!--SideBar-->
     <div id = "sidebar-wrapper">
         <ul class = "sidebar-nav">
-            <a href="home"> <li><img src="/link_images/home.png" width="30%" height="30%">  </li> </a>
-            <a href="profile"> <li> <img src="/link_images/user.png" width="30%" height="30%">  </li> </a>
-            <a href="workout_builder"> <li> <img src="/link_images/one-dumbbell.png" width="30%" height="30%"> </li> </a>
-            <a href="workout_search"> <li>  <img src="/link_images/search.png" width="30%" height="30%"> </li> </a>
-            <a href="settings"> <li class="active"> <img src="/link_images/settings-gears.png" width="30%" height="30%"> </li>  </a>
+            <a href="home" title="Home">
+                <li><img src="/link_images/home.png" width="30%" height="30%"></li>
+            </a>
+            <a href="profile" title="Profile">
+                <li><img src="/link_images/user.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_builder" title="Workout Builder">
+                <li><img src="/link_images/one-dumbbell.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_search" title="Workout Search">
+                <li><img src="/link_images/search.png" width="30%" height="30%"></li>
+            </a>
+            <a href="settings" title="Settings">
+                <li class="active"> <img src="/link_images/settings-gears.png" width="30%" height="30%"></li>
+            </a>
         </ul>
     </div>
 
-    <div class = " container-fluid " id = "page-content-wrapper">
 
+    <!--Settings-->
+    <div class = " container-fluid " id = "page-content-wrapper">
+        <div class = "container-fluid basic_card dropdown">
+            <h1 class = "template_padding center_text">Settings</h1>
+            <!--Settings form-->
+            <div class="form-layout">
+                <form>
+                    <!--Privacy-->
+                    <div class="col-sm-12 form-group">
+                        <div>
+                            <label for="privacyToggle">Privacy</label>
+                        </div>
+                        <div class="btn-group-toggle" data-toggle="buttons" id="privacyToggle">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="public" autocomplete="off" checked> Public
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="private" autocomplete="off"> Private
+                            </label>
+                        </div>
+                    </div>
+                    <!--About-->
+                    <div class="form-group col-sm-12">
+                        <label for="aboutText">About</label>
+                        <textarea class="form-control" id="aboutText" rows="3"></textarea>
+                    </div>
+                    <!--Profile Picture-->
+                    <div class="form-group col-sm-12">
+                        <label for="pictureUpload">Profile Picture</label>
+                        <input type="file" class="form-control-file" id="pictureUpload">
+                    </div>
+                    <!--Save-->
+                    <div class="button form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                    <!--Logout-->
+                    <div class="button form-group">
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>
