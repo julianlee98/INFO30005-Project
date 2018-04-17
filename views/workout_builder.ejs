@@ -101,8 +101,8 @@
                     </div>
                     <!--Time-->
                     <div class="form-group col-sm-12">
-                        <label for="time">Time (in minutes)</label>
-                        <input type="number" class="form-control input-number" id="time">
+                        <label for="duration">Duration (in minutes)</label>
+                        <input type="number" class="form-control input-number" id="duration">
                     </div>
                     <!--Tags-->
                     <div class="form-group col-sm-12">
@@ -125,17 +125,34 @@
                     <!--Difficulty-->
                     <div class="col-sm-12 form-group">
                         <div>
+                            <label for="intensityToggle">Intensity</label>
+                        </div>
+                        <div class="btn-group-toggle" data-toggle="buttons" id="difficultyToggle">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="low" autocomplete="off" checked> Low
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="moderate" autocomplete="off"> Moderate
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="vigorous" autocomplete="off"> Vigorous
+                            </label>
+                        </div>
+                    </div>
+                    <!--Difficulty-->
+                    <div class="col-sm-12 form-group">
+                        <div>
                             <label for="difficultyToggle">Difficulty</label>
                         </div>
                         <div class="btn-group-toggle" data-toggle="buttons" id="difficultyToggle">
                             <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="male" autocomplete="off" checked> Beginner
+                                <input type="radio" name="options" id="beginner" autocomplete="off" checked> Beginner
                             </label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="options" id="female" autocomplete="off"> Intermediate
+                                <input type="radio" name="options" id="intermediate" autocomplete="off"> Intermediate
                             </label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="options" id="any-gender" autocomplete="off"> Advanced
+                                <input type="radio" name="options" id="advanced" autocomplete="off"> Advanced
                             </label>
                         </div>
                     </div>
