@@ -15,6 +15,7 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/myCss', express.static(__dirname + '/views/Css/'));
 app.use('/link_images', express.static(__dirname + '/views/Css/Images'));
+app.use('/link_js', express.static(__dirname + '/views/Scripts'));
 
 
 app.listen(PORT, function(){
