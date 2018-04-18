@@ -21,7 +21,7 @@ body{
 @keyframes drop_login {
     0%{rgba(241, 241, 241, 0);}
     70%{ transform: translateY(950px)}
-    100%{transform: translateY(870px); rgba(241, 241, 241, 0.8);}
+    100%{transform: translateY(820px); rgba(241, 241, 241, 0.8);}
 }
 
 
