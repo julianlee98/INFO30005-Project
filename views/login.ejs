@@ -16,10 +16,9 @@
     <script>
         $(document).ready(function(){
             var xhttp = new XMLHttpRequest();
-            $("#loginbtn").click(function(){
+            $("#loginBtn").click(function(){
                 var email = $("#logInEmail").val();
                 if(!email){
-                    console.log(null);
                 }
                 else {
                     xhttp.onreadystatechange = function () {
@@ -28,13 +27,60 @@
                             if(this.responseText && $("#logInPassword").val() == password){
                                 window.location.href = "/home";
                             }
+                            else{
+                                //EMAIL OR PASSWORD WRONG THNING
+                            }
                         }
                     };
                     xhttp.open("GET", "http://localhost:3000/api/" + email, true);
                     xhttp.send();
                 }
             });
+
+            $("#signupBtn").click(function(){
+                var xhttp = new XMLHttpRequest();
+                // var check;
+
+                var email = $("#signUpEmail").val();
+                var fname = $("#signUpFName").val();
+                var lname = $("#signUpLName").val();
+                var password = $("#signUpPassword").val();
+
+                if(!email || !fname || !lname || !password ){
+                }
+                else {
+                    //Check if in database
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            if(this.responseText){
+                                console.log("lmfao");
+                            }
+                            else{
+                                send_signup(email, fname, lname, password);
+                            }
+                        }
+                    };
+                    xhttp.open("GET", "http://localhost:3000/api/" + email, true);
+                    xhttp.send();
+                }
+            });
+
         });
+
+        function send_signup(email, password, fname, lname){
+                 var xhttp = new XMLHttpRequest();
+                 xhttp.onreadystatechange = function () {
+                     if (this.readyState == 4 && this.status == 200) {
+                         console.log(this.responseText);
+                     }
+                 }
+                xhttp.open("POST", "http://localhost:3000/api/", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+             var postrequest = ' { ' + '"email": '  + '"'  + email + '"' + ',"password": '  + '"'  + password + '"' + ',"first_name": '  + '"'  + fname + '"' + ',"last_name": '  + '"'  + lname + '"'   + '}';
+                xhttp.send(postrequest);
+                console.log(postrequest);
+                console.log("sent");
+        };
     </script>
 </head>
 <body>
@@ -72,7 +118,7 @@
                             </div>
                             <!--Log in button-->
                             <div class="col-sm-2 btn_fix">
-                                 <button type="button" class="btn btn-primary make_btn_orange" id = "loginbtn">Log in</button>
+                                 <button type="button" class="btn btn-primary make_btn_orange" id = "loginBtn">Log in</button>
                             </div>
                         </div>
                     </form>
@@ -118,7 +164,7 @@
                             </div>
 
                             <div class="button">
-                                <button type="submit" class="btn btn-primary make_btn_orange">Submit</button>
+                                <button type="button" class="btn btn-primary make_btn_orange" id = "signupBtn">Submit</button>
                             </div>
                         </form>
                     </div>
