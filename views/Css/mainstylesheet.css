@@ -45,7 +45,7 @@ body{
     top: -800px;
 }
 .basic_card:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
 }
 
 .basic_card_scroll {
@@ -60,7 +60,7 @@ body{
 }
 
 .basic_card_scroll:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
 }
 
 .basic_smoll {
@@ -88,12 +88,16 @@ body{
 
 /*GOES IN CONTAINERS*/
 .container_card{
-    background-color: rgba(241, 241, 241, 0.9);
-    position: relative;
-    height: 100%;
-    /*margin-top: 1.5%;*/
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+     background-color: rgba(241, 241, 241, 0.9);
+     position: relative;
+     height: 100%;
+     /*margin-top: 1.5%;*/
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+     transition: 0.3s;
+ }
+
+.container_card:hover{
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
 }
 
 .container_card_scrollable{
@@ -598,7 +602,7 @@ hr {
 
 
 .cardEffect:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
 }
 
 .description {

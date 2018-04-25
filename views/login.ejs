@@ -15,6 +15,25 @@
 
     <script>
         $(document).ready(function(){
+            var xhttp = new XMLHttpRequest();
+            $("#loginbtn").click(function(){
+                var email = $("#logInEmail").val();
+                if(!email){
+                    console.log(null);
+                }
+                else {
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var password = JSON.parse(this.responseText)["password"];
+                            if(this.responseText && $("#logInPassword").val() == password){
+                                window.location.href = "/home";
+                            }
+                        }
+                    };
+                    xhttp.open("GET", "http://localhost:3000/api/" + email, true);
+                    xhttp.send();
+                }
+            });
         });
     </script>
 </head>
@@ -53,7 +72,7 @@
                             </div>
                             <!--Log in button-->
                             <div class="col-sm-2 btn_fix">
-                                 <a type="button" class="btn btn-primary make_btn_orange" href="\home">Log in</a>
+                                 <button type="button" class="btn btn-primary make_btn_orange" id = "loginbtn">Log in</button>
                             </div>
                         </div>
                     </form>

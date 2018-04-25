@@ -1,8 +1,12 @@
-var testContent = [
-    {
-        header: "Test",
-        content: "This is some test content"
-    }
-];
+var mongoose = require('mongoose');
 
-module.exports = testContent;
+mongoose.connect('mongodb://julian_lee:123456789@ds247698.mlab.com:47698/webtech_project', function(err, db){
+    if(!err){
+        console.log("Connected");
+    }
+    else {
+        console.log("Error");
+    }
+    });
+
+require('./user.js');

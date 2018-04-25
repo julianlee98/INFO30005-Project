@@ -13,4 +13,11 @@ router.get('/workout_search', controller.workoutSearch);
 
 router.get('/comingSoon', controller.comingSoon);
 
+router.get('/api', controller.findAllUsers);
+router.post('/api', controller.createUserFunc);
+
+router.get('/api/:uemail', controller.findUser)
+
+
+
 module.exports = router;

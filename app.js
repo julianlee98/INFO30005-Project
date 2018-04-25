@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 const router = require('./routes/routes');
+require('./models/db.js');
+
 
 app.use(router);
 
@@ -16,7 +18,6 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/myCss', express.static(__dirname + '/views/Css/'));
 app.use('/link_images', express.static(__dirname + '/views/Css/Images'));
 app.use('/link_js', express.static(__dirname + '/views/Scripts'));
-
 
 app.listen(PORT, function(){
     console.log("Express listening on port ${PORT}");
