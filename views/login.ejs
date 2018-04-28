@@ -15,71 +15,6 @@
 
     <script>
         $(document).ready(function(){
-            var xhttp = new XMLHttpRequest();
-            $("#loginBtn").click(function(){
-                var email = $("#logInEmail").val();
-                if(!email){
-                }
-                else {
-                    xhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var password = JSON.parse(this.responseText)["password"];
-                            if(this.responseText && $("#logInPassword").val() == password){
-                                window.location.href = "/home";
-                            }
-                            else{
-                                //EMAIL OR PASSWORD WRONG THNING
-                            }
-                        }
-                    };
-                    xhttp.open("GET", "http://localhost:3000/api/" + email, true);
-                    xhttp.send();
-                }
-            });
-
-            $("#signupBtn").click(function(){
-                var xhttp = new XMLHttpRequest();
-                // var check;
-
-                var email = $("#signUpEmail").val();
-                var fname = $("#signUpFName").val();
-                var lname = $("#signUpLName").val();
-                var password = $("#signUpPassword").val();
-
-                if(!email || !fname || !lname || !password ){
-                }
-                else {
-                    //Check if in database
-                    xhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            if(this.responseText){
-                                console.log("lmfao");
-                            }
-                            else{
-                                send_signup(email, fname, lname, password);
-                            }
-                        }
-                    };
-                    xhttp.open("GET", "http://localhost:3000/api/" + email, true);
-                    xhttp.send();
-                }
-            });
-
-        });
-
-        function send_signup(email, password, fname, lname){
-                 var xhttp = new XMLHttpRequest();
-                 xhttp.onreadystatechange = function () {
-                     if (this.readyState == 4 && this.status == 200) {
-                         console.log(this.responseText);
-                     }
-                 }
-                xhttp.open("POST", "http://localhost:3000/api/", true);
-                xhttp.setRequestHeader("Content-type", "application/json");
-             var postrequest = ' { ' + '"email": '  + '"'  + email + '"' + ',"password": '  + '"'  + password + '"' + ',"first_name": '  + '"'  + fname + '"' + ',"last_name": '  + '"'  + lname + '"'   + '}';
-                xhttp.send(postrequest);
-                console.log(postrequest);
-                console.log("sent");
         };
     </script>
 </head>
@@ -104,21 +39,22 @@
             <div class = "col-sm-5 no_pad">
                 <div class = "col-sm-12 container_card login_padding">
                     <!--Log in form-->
-                    <form class="log-in-form">
+                    <form action = "/submitLogin" class="log-in-form"  method="post">
                         <div class="form-row">
                             <!--Email log in-->
                             <div class="form-group col-sm-5">
                                 <label>Email Address</label>
-                                <input type="email" class="form-control" id="logInEmail" placeholder="Enter email">
+                                <input type="email" name = "email" class="form-control" id="logInEmail" placeholder="Enter email">
                             </div>
                             <!--Password log in-->
                             <div class="form-group col-sm-5">
                                 <label>Password</label>
-                                <input type="password" class="form-control" id="logInPassword" placeholder="Password">
+                                <input type="password" name = "password" class="form-control" id="logInPassword" placeholder="Password">
                             </div>
                             <!--Log in button-->
                             <div class="col-sm-2 btn_fix">
-                                 <button type="button" class="btn btn-primary make_btn_orange" id = "loginBtn">Log in</button>
+                                 <!--<button type="button" class="btn btn-primary make_btn_orange" id = "loginBtn">Log in</button>-->
+                                <button type="submit" class="btn btn-primary make_btn_orange">Log in</button>
                             </div>
                         </div>
                     </form>
@@ -129,42 +65,42 @@
                     <h2 class="col-sm-12">Sign Up</h2>
                     <!--Sign up form-->
                     <div class="sign-up-form">
-                        <form>
+                        <form action = "/submitSignup" method = "post">
                             <!--First name & last name-->
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
                                     <label for="signUpFName">First Name</label>
-                                    <input type="text" class="form-control" id="signUpFName" placeholder="First name">
+                                    <input type="text" name="fname" class="form-control" id="signUpFName" placeholder="First name">
                                 </div>
 
                                 <div class="form-group col-sm-6">
                                     <label for="signUpLName">Last name</label>
-                                    <input type="text" class="form-control" id="signUpLName" placeholder="Last name">
+                                    <input type="text" name = "lname" class="form-control" id="signUpLName" placeholder="Last name">
                                 </div>
                             </div>
                             <!--Email-->
                             <div class="form-group col-sm-12">
                                 <label for="signUpEmail">Email address</label>
-                                <input type="email" class="form-control" id="signUpEmail" placeholder="Enter email">
+                                <input type="email" class="form-control" name = "email" id="signUpEmail" placeholder="Enter email">
                             </div>
                             <!--Username-->
                             <div class="form-group col-sm-12">
                                 <label for="signUpUsername">Username</label>
-                                <input type="text" class="form-control" id="signUpUsername" placeholder="Username">
+                                <input type="text" class="form-control" id="signUpUsername" name = "username" placeholder="Username">
                             </div>
                             <!--Password-->
                             <div class="form-group col-sm-12">
                                 <label for="signUpPassword">Password</label>
-                                <input type="password" class="form-control" id="signUpPassword"
+                                <input type="password" class="form-control" id="signUpPassword" name = "password"
                                        aria-describedby="passwordDetails" placeholder="Password">
                                 <small id="passwordDetails" class="form-text text-muted">
                                     Your password must be 8-20 characters long, contain letters and numbers,
                                     and must not contain spaces, special characters, or emoji.
                                 </small>
                             </div>
-
                             <div class="button">
-                                <button type="button" class="btn btn-primary make_btn_orange" id = "signupBtn">Submit</button>
+                                <!--<button type="button" class="btn btn-primary make_btn_orange" id = "signupBtn">Submit</button>-->
+                                <button type="submit" class="btn btn-primary make_btn_orange">Submit</button>
                             </div>
                         </form>
                     </div>

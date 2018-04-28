@@ -102,6 +102,7 @@
       "version": "1.8.1"
     },
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "favicon": "0.0.2",
     "finalhandler": {
       "integrity": "sha512-Y1GUDo39ez4aHAw7MysnUD5JzYX+WaIj8I57kO3aEPT1fFRL4sr7mjei97FgnwhAyyzRYmQZaTHb2+9uZ1dPtg==",
