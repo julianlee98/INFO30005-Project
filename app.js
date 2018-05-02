@@ -7,6 +7,12 @@ app.set('view engine', 'ejs');
 
 const router = require('./routes/routes');
 require('./models/db.js');
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var session = require('express-session');
+app.use(session({secret: "asdasdafawdawdasdasdadwhereq123123", resave:false, saveUninitialized: true}));
 
 
 app.use(router);
