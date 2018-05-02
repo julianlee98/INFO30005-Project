@@ -35,7 +35,7 @@ router.post("/submitSignup", function(req, res){
    var email = req.body.email;
    var password = req.body.password;
 
-   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts: []} , function(err,user){
+   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : []} , function(err,user){
        if(err){
            console.log(err);
            return res.status(500).send();
@@ -51,17 +51,65 @@ router.get('/home', function (req, res) {
         return res.status(401).send();
     }
 
-    User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
+    // User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            user.posts.push({'title': 'test', 'Body': 'test', 'Likes' : 5})
+            return user.save();
+        }
+    ).then(function(user) {
+        // make sure it's saved, or just don't do anything
+    })
+    .catch(function (err) {
 
-    res.render("home");
+    })
+
+    // var postsToGive = [];
+    // req.session.user.posts.forEach(function(post){
+    //     postsToGive.push(JSON.stringify(post));
+    // });
+    //
+    // console.log(postsToGive);
+    res.render("home", {user: req.session.user,
+        // posts: postsToGive.toString()
+    } );
+});
+
+router.get('/posts', function(req, res){
+    res.send(req.session.user.posts);
+});
+
+
+
+router.post("/newPost", function(req, res){
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+    var title  = req.body.title;
+    var Body = req.body.Body;
+    var likes = req.body.likes;
+
+    // User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            user.posts.push({'title': title, 'Body': Body, 'Likes' : likes});
+            return user.save();
+        }
+    ).then(function(user) {
+        // make sure it's saved, or just don't do anything
+    })
+        .catch(function (err) {
+
+        })
 });
 
 router.get('/profile', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
-    console.log(req.session.user);
-    res.render("profile", {user: req.session.user});
+
+    res.render("profile", {user: req.session.user} );
+
 });
 
 router.get('/settings', function (req, res) {

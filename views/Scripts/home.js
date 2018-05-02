@@ -1,24 +1,9 @@
 $(document).ready(function(){
+    //generatePosts();
     $("#sub_make_post").click(function(){
         var status = $("#user_input").val();
-        var html_to_add;
-        html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-            " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
-            " </div>\n" +
-            " </div>\n" +
-            " <div class='col-sm-10 no_pad'>\n" +
-            " <div class='col-sm-12 container_card template_padding'><p>\n" +
-            " {1}" +
-            " </p>\n" +
-            " <div class='post-meta'>\n" +
-            " <p>Liked by 3 people</p>\n" +
-            " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
-            " <div class='post-interaction'>\n" +
-            " <div class='btn-group btn-group-justified'> <a href='#' class='btn btn-default like'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
-            " </div>\n" +
-            " </div>\n" +
-            " </div>", status);
-        $("#post_creation").after(html_to_add);
+
+        $.post('/newPost', {'title' : "test", "Body": status, "likes" : 0 });
     });
 
     $(document).on('change', '.btn-file :file', function() {
@@ -86,6 +71,7 @@ $(document).ready(function(){
 });
 
 //https://www.sitepoint.com/jquery-string-template-format-function/
+
 var JQUERY4U = {};
 JQUERY4U.UTIL = {
     formatVarString: function()
@@ -102,3 +88,4 @@ JQUERY4U.UTIL = {
 }
 JQUERY4U.UTIL.formatVarString('{1} is a {2} aimed to help you learn {3}.', 'jQuery4u', 'blog', 'jQuery');
 //output: "jQuery4u is a blog aimed to help you learn jQuery.
+

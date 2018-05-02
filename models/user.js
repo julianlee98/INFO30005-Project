@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema(
         "password": String,
         "first_name": String,
         "last_name": String,
-        "posts" : Posts
+        "posts" : [Posts]
     }
 );
 

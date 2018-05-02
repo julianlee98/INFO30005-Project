@@ -15,6 +15,39 @@
     <!--Custom Javascript for make post and follow accept/reject-->
     <!--Make post submit works just as an example of functionality-->
     <script src = "/link_js/home.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $.get('/posts', function(data){
+                console.log(data);
+                generatePosts(data);
+            });
+        });
+
+        function generatePosts(input){
+            input.forEach(function(post){
+                console.log(post[0]);
+                html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
+                    " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
+                    " </div>\n" +
+                    " </div>\n" +
+                    " <div class='col-sm-10 no_pad'>\n" +
+                    " <div class='col-sm-12 container_card template_padding'><p>\n" +
+                    " {1}" +
+                    " </p>\n" +
+                    " <div class='post-meta'>\n" +
+                    " <p>Liked by {2} people</p>\n" +
+                    " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
+                    " <div class='post-interaction'>\n" +
+                    " <div class='btn-group btn-group-justified'> <a href='#' class='btn btn-default like'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
+                    " </div>\n" +
+                    " </div>\n" +
+                    " </div>", post.Body, post.Likes );
+                $("#post_creation").after(html_to_add);
+            });
+        };
+
+    </script>
     
 </head>
 <body>
@@ -171,6 +204,10 @@
             <!--</div>-->
 
         <!--</div>-->
+
+        <div id="posts">
+
+        </div>
 
         <!--Follow request example-->
         <div class="container-fluid basic_card dropdown follow-request">
