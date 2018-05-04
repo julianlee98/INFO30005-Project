@@ -200,7 +200,7 @@ body{
 
 .log-in-form {
     padding-top: 10px;
-    margin-bottom: 20%;
+    padding-bottom: 11%;
 }
 
 .button {
@@ -533,6 +533,10 @@ hr {
     background-color: #ff751a;
 }
 
+.liked:focus{
+    background-color: #ff751a;
+}
+
 
 .search_table{
     padding-top: 1%;
@@ -635,4 +639,9 @@ hr {
 
 .btn-warning:hover , .btn-warning:active, .btn-warning:visited{
     background-color: #854210; !important;
+}
+
+.invalidText{
+    color: red;
+    padding-left: 2.5%;
 }

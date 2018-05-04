@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var Posts = mongoose.Schema({
-    "title" : String,
     "Body" : String,
-    "Likes" : Number
+    "Likes" : Number,
+    "index" : Number
 });
 
 var userSchema = mongoose.Schema(
@@ -12,7 +12,8 @@ var userSchema = mongoose.Schema(
         "password": String,
         "first_name": String,
         "last_name": String,
-        "posts" : [Posts]
+        "posts" : [Posts],
+        "friends" : [String]
     }
 );
 

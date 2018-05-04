@@ -5,7 +5,7 @@ const app = express();
 app.set('view engine', 'ejs');
 
 const router = require('./routes/routes');
-require('./models/db.js');
+// require('./models/db.js');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

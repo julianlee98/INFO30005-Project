@@ -16,38 +16,48 @@
     <!--Make post submit works just as an example of functionality-->
     <script src = "/link_js/home.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $.get('/posts', function(data){
-                console.log(data);
-                generatePosts(data);
-            });
-        });
+    <!--<script>-->
+        <!--$(document).ready(function(){-->
+           <!--refreshPosts();-->
+        <!--});-->
 
-        function generatePosts(input){
-            input.forEach(function(post){
-                console.log(post[0]);
-                html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                    " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
-                    " </div>\n" +
-                    " </div>\n" +
-                    " <div class='col-sm-10 no_pad'>\n" +
-                    " <div class='col-sm-12 container_card template_padding'><p>\n" +
-                    " {1}" +
-                    " </p>\n" +
-                    " <div class='post-meta'>\n" +
-                    " <p>Liked by {2} people</p>\n" +
-                    " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
-                    " <div class='post-interaction'>\n" +
-                    " <div class='btn-group btn-group-justified'> <a href='#' class='btn btn-default like'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
-                    " </div>\n" +
-                    " </div>\n" +
-                    " </div>", post.Body, post.Likes );
-                $("#post_creation").after(html_to_add);
-            });
-        };
+        <!--function refreshPosts(){-->
+            <!--var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";-->
+            <!--$.get('/email', function(data){-->
+                <!--console.log(data);-->
+                <!--var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);-->
+                <!--console.log(requestWithEmail);-->
+                <!--$.get(requestWithEmail, function(p){-->
+                    <!--console.log(p[0]);-->
+                    <!--generatePosts(p[0].posts);-->
+                <!--});-->
+            <!--});-->
+        <!--}-->
 
-    </script>
+        <!--function generatePosts(input){-->
+            <!--input.forEach(function(post){-->
+                <!--console.log(post[0]);-->
+                <!--html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +-->
+                    <!--" <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +-->
+                    <!--" </div>\n" +-->
+                    <!--" </div>\n" +-->
+                    <!--" <div class='col-sm-10 no_pad'>\n" +-->
+                    <!--" <div class='col-sm-12 container_card template_padding'><p>\n" +-->
+                    <!--" {1}" +-->
+                    <!--" </p>\n" +-->
+                    <!--" <div class='post-meta'>\n" +-->
+                    <!--" <p>Liked by {2} people</p>\n" +-->
+                    <!--" <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +-->
+                    <!--" <div class='post-interaction'>\n" +-->
+                    <!--" <div class='btn-group btn-group-justified'> <a href='#' class='btn btn-default like'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +-->
+                    <!--" </div>\n" +-->
+                    <!--" </div>\n" +-->
+                    <!--" </div>", post.Body, post.Likes );-->
+                <!--$("#post_creation").after(html_to_add);-->
+            <!--});-->
+        <!--};-->
+
+    <!--</script>-->
     
 </head>
 <body>
@@ -118,7 +128,7 @@
                     <div class = "sub_title"><b> Make post </b></div>
                     <div class = "form-group variable_section text-right">
                         <textarea class="form-control" rows="5" id = "user_input"></textarea>
-                        <button type="submit" class="btn btn-default sub" id = "sub_make_post">Submit</button>
+                        <button type="button" class="btn btn-default sub" id = "sub_make_post">Submit</button>
                     </div>
                 </div>
 
@@ -254,7 +264,7 @@
                     </div>
 
                     <div class="btn-group btn-group-justified">
-                        <a href="#" class="btn btn-default like">Like</a>
+                        <a href='javascript:void();' class="btn btn-default like" data-content = "julianlee98@gmail.com">Like</a>
                         <a href="#" class="btn btn-default">Comment</a>
                         <a href="#" class="btn btn-default">Share</a>
                         <a href="#" class="btn btn-default">View Comments</a>
@@ -289,7 +299,7 @@
                     </div>
 
                     <div class="btn-group btn-group-justified">
-                        <a href="#" class="btn btn-default like">Like</a>
+                        <a href='javascript:void();' class="btn btn-default like">Like</a>
                         <a href="#" class="btn btn-default">Comment</a>
                         <a href="#" class="btn btn-default">Share</a>
                         <a href="#" class="btn btn-default">View Comments</a>
@@ -324,7 +334,7 @@
                         <p><time datetime="2018-4-15 08:00">4 February 2018 8:00AM</time></p>
                     </div>
                     <div class="btn-group btn-group-justified">
-                        <a href="#" class="btn btn-default like">Like</a>
+                        <a href='javascript:void();' class="btn btn-default like">Like</a>
                         <a href="#" class="btn btn-default">Comment</a>
                         <a href="#" class="btn btn-default">Share</a>
                         <a href="#" class="btn btn-default">View Comments</a>
@@ -359,7 +369,7 @@
                         <p><time datetime="2018-4-15 08:00">4 February 2018 8:00AM</time></p>
                     </div>
                     <div class="btn-group btn-group-justified">
-                        <a href="#" class="btn btn-default like">Like</a>
+                        <a href='javascript:void();' class="btn btn-default like">Like</a>
                         <a href="#" class="btn btn-default">Comment</a>
                         <a href="#" class="btn btn-default">Share</a>
                         <a href="#" class="btn btn-default">View Comments</a>

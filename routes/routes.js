@@ -19,7 +19,7 @@ router.post('/submitLogin', function(req, res){
             return res.status(500).send();
         }
         if(!user) {
-            res.redirect("/login");
+            res.redirect("/loginIncorrect");
             return res.status(404).send();
         }
         req.session.user = user;
@@ -50,33 +50,15 @@ router.get('/home', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
-
-    // User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
-    User.findOne({email : req.session.user.email}).then(
-        function(user) {
-            user.posts.push({'title': 'test', 'Body': 'test', 'Likes' : 5})
-            return user.save();
-        }
-    ).then(function(user) {
-        // make sure it's saved, or just don't do anything
-    })
-    .catch(function (err) {
-
-    })
-
-    // var postsToGive = [];
-    // req.session.user.posts.forEach(function(post){
-    //     postsToGive.push(JSON.stringify(post));
-    // });
-    //
-    // console.log(postsToGive);
-    res.render("home", {user: req.session.user,
-        // posts: postsToGive.toString()
-    } );
+    res.render("home", {user: req.session.user});
 });
 
 router.get('/posts', function(req, res){
     res.send(req.session.user.posts);
+});
+
+router.get('/email', function(req, res){
+    res.send(req.session.user.email);
 });
 
 
@@ -85,22 +67,55 @@ router.post("/newPost", function(req, res){
     if(!req.session.user){
         return res.status(401).send();
     }
-    var title  = req.body.title;
     var Body = req.body.Body;
     var likes = req.body.likes;
 
     // User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
     User.findOne({email : req.session.user.email}).then(
         function(user) {
-            user.posts.push({'title': title, 'Body': Body, 'Likes' : likes});
+            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length});
+            res.status(200).send();
             return user.save();
         }
-    ).then(function(user) {
-        // make sure it's saved, or just don't do anything
+    ).then(function() {
     })
         .catch(function (err) {
 
         })
+});
+
+router.post("/likePost", function(req, res){
+   if(!req.session.user){
+       return res.status(401).send();
+   }
+
+   var email = req.body.email;
+   var index = req.body.index;
+   var add = req.body.add;
+
+   console.log(email);
+   console.log("???!!");
+
+   User.findOne({email : email}).then(
+       function(user){
+           if(add == "true") {
+               user.posts[index].Likes += 1;
+               console.log(user.posts[index].Likes);
+               res.status(200).send();
+           }
+           else{
+               user.posts[index].Likes -= 1;
+               console.log(user.posts[index].Likes);
+               res.status(200).send()
+           }
+           return user.save();
+       }
+   ).then(function() {
+   })
+       .catch(function (err) {
+
+       })
+
 });
 
 router.get('/profile', function (req, res) {
@@ -110,6 +125,11 @@ router.get('/profile', function (req, res) {
 
     res.render("profile", {user: req.session.user} );
 
+});
+
+
+router.get('/loginIncorrect', function (req, res){
+   res.render("loginIncorrect");
 });
 
 router.get('/settings', function (req, res) {
