@@ -69,11 +69,12 @@ router.post("/newPost", function(req, res){
     }
     var Body = req.body.Body;
     var likes = req.body.likes;
+    var date = req.body.date;
 
     // User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
     User.findOne({email : req.session.user.email}).then(
         function(user) {
-            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length});
+            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length, 'date' : date});
             res.status(200).send();
             return user.save();
         }
@@ -93,19 +94,24 @@ router.post("/likePost", function(req, res){
    var index = req.body.index;
    var add = req.body.add;
 
-   console.log(email);
-   console.log("???!!");
-
    User.findOne({email : email}).then(
        function(user){
            if(add == "true") {
-               user.posts[index].Likes += 1;
-               console.log(user.posts[index].Likes);
+               user.posts[index].likes.push(req.session.user.email);
+               console.log("oh");
+               console.log(user.posts[index].likes);
                res.status(200).send();
            }
            else{
-               user.posts[index].Likes -= 1;
-               console.log(user.posts[index].Likes);
+               var x = 0;
+               user.posts[index].likes.forEach(function(users){
+                   if(users == req.session.user.email){
+                       user.posts[index].likes.splice(x,1);
+                   }
+                   x+=1;
+               });
+               console.log("oh");
+               console.log(user.posts[index].likes);
                res.status(200).send()
            }
            return user.save();

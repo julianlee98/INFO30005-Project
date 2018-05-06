@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 
 var Posts = mongoose.Schema({
     "Body" : String,
-    "Likes" : Number,
-    "index" : Number
+    "likes" : [String],
+    "index" : Number,
+    "date" : String
 });
 
 var userSchema = mongoose.Schema(
