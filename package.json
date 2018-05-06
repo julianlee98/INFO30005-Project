@@ -201,6 +201,7 @@
       "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.18.tgz",
       "version": "2.1.18"
     },
+    "moment": "^2.22.1",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.16",
     "ms": {

@@ -35,7 +35,7 @@ router.post("/submitSignup", function(req, res){
    var email = req.body.email;
    var password = req.body.password;
 
-   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : []} , function(err,user){
+   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : ["julianlee98@gmail.com", "test@test.com", "aaaa@aaaa.com"]} , function(err,user){
        if(err){
            console.log(err);
            return res.status(500).send();
@@ -61,6 +61,9 @@ router.get('/email', function(req, res){
     res.send(req.session.user.email);
 });
 
+router.get('/friends', function(req, res){
+   res.send(req.session.user.friends);
+});
 
 
 router.post("/newPost", function(req, res){
@@ -70,11 +73,12 @@ router.post("/newPost", function(req, res){
     var Body = req.body.Body;
     var likes = req.body.likes;
     var date = req.body.date;
+    var fname = req.session.user.first_name;
+    var lname = req.session.user.last_name;
 
-    // User.findOneAndUpdate({email : req.session.user.email}, {"$push" : { "title" : "test title", "body" : "testbody", "likes" : 5}});
     User.findOne({email : req.session.user.email}).then(
         function(user) {
-            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length, 'date' : date});
+            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length, 'date' : date, 'first_name' : fname, 'last_name' : lname} );
             res.status(200).send();
             return user.save();
         }

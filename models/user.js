@@ -4,7 +4,9 @@ var Posts = mongoose.Schema({
     "Body" : String,
     "likes" : [String],
     "index" : Number,
-    "date" : String
+    "date" : String,
+    "first_name" : String,
+    "last_name" : String
 });
 
 var userSchema = mongoose.Schema(

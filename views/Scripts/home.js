@@ -1,6 +1,9 @@
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+function postEmailOb(post, email)
+{
+    this.post = post;
+    this.email = email;
+}
+
 
 
 function n_post_ob()
@@ -27,7 +30,6 @@ function postData (callback, status, n_posts){
         url:     "/newPost",
         data:    {"Body": status, "likes" : 0, "date": d.toString() },
         success: function(data, textStatus, xhr) {
-            console.log(d);
             callback(n_posts);
         },
         // vvv---- This is the new bit
@@ -46,8 +48,8 @@ function postData2(n_posts){
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
         $.get(requestWithEmail, function(p){
             var test = [];
-            test.push(p[0].posts[n_posts.value]);
-            console.log(test);
+            var item = new postEmailOb(p[0].posts[n_posts.value], data);
+            test.push(item);
             generatePosts(test);
             n_posts.add();
         });
@@ -117,14 +119,13 @@ function t(){
 
 
 $(document).ready(function(){
-    refreshPosts();
+    // refreshPosts();
+    loopThroughFriends();
     var n_posts = new n_post_ob();
     newPost(n_posts,set_n_post);
     $("#sub_make_post").click(function(){
         //var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
         var status = $("#user_input").val();
-        // console.log(n_posts.value);
-        // console.log("????????????????");
         postData(postData2, status, n_posts);
     });
 
@@ -198,15 +199,69 @@ function refreshPosts(){
         console.log(requestWithEmail);
         $.get(requestWithEmail, function(p){
             console.log("wat");
-            generatePosts(p[0].posts, data);
+            generateMyPosts(p[0].posts, data);
         });
     });
 }
 
-function generatePosts(input, email){
+
+function loopThroughFriends(){
+    $.ajax({
+        type:    "GET",
+        url:     "/friends",
+        success: function(data) {
+            console.log(data);
+            a(data);
+        },
+        error:   function(jqXHR, textStatus, errorThrown) {
+            alert("Error, status = " + textStatus + ", " +
+                "error thrown: " + errorThrown
+            );
+        }
+    });
+}
+
+function a(list){
+    var array = [];
+    var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
+    console.log(list);
+    list.forEach(function(friend){
+        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, friend);
+        $.get(requestWithEmail, function(p){
+            (p[0].posts).forEach(function(post){
+                var item = new postEmailOb(post, friend);
+                array.push(item);
+            });
+            b(array);
+        });
+    });
+}
+
+function b(array){
+    array.sort(function(a, b) {
+        var dateA = moment(a.post.date); // ignore upper and lowercase
+        var dateB = moment(b.post.date) ; // ignore upper and lowercase
+        if (dateA.isBefore(dateB)) {
+            return -1;
+        }
+        if (dateB.isBefore(dateA)) {
+            return 1;
+        }
+
+        // names must be equal
+        return 0;
+    });
+    generatePosts(array);
+}
+
+
+
+function generateMyPosts(input, email){
     console.log("ge e n r a t e ");
     input.forEach(function(post){
         var found = 0;
+        //Unpack datetime
+        var d = new moment(post.date);
         post.likes.forEach(function(like){
             if(like == email){
                 found = 1;
@@ -223,19 +278,15 @@ function generatePosts(input, email){
                 " </p>\n" +
                 " <div class='post-meta'>\n" +
                 " <p>Liked by <span>{2}</span> people</p>\n" +
-                " <p><time datetime='2018-4-15 08:00'>4 February 2018 8:00AM</time></p></div>\n" +
+                " <p><time>{5}</time></p></div>\n" +
                 " <div class='post-interaction'>\n" +
                 " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like liked' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
                 " </div>\n" +
                 " </div>\n" +
-                " </div>", post.Body, post.likes.length, email, post.index);
+                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:m a'));
             $("#post_creation").after(html_to_add);
         }
         else{
-            //Unpack
-            console.log(post.date);
-            var d = new Date(post.date);
-            console.log(d.getDay());
 
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
                 " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
@@ -252,7 +303,65 @@ function generatePosts(input, email){
                 " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
                 " </div>\n" +
                 " </div>\n" +
-                " </div>", post.Body, post.likes.length, email, post.index);
+                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:mm a'));
+            $("#post_creation").after(html_to_add);
+        }
+    });
+    t();
+};
+
+function generatePosts(input){
+    console.log(input.date);
+    input.forEach(function(postEmail){
+        console.log("ge e n r a t e ");
+        console.log(postEmail);
+        var email = postEmail.email;
+        var post = postEmail.post;
+        var found = 0;
+        //Unpack datetime
+        var d = new moment(post.date);
+        post.likes.forEach(function(like){
+            if(like == email){
+                found = 1;
+            }
+        });
+        if(found ==  1){
+            html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
+                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
+                " </div>\n" +
+                " </div>\n" +
+                " <div class='col-sm-10 no_pad'>\n" +
+                " <div class='col-sm-12 container_card template_padding'><p>\n" +
+                " {1}" +
+                " </p>\n" +
+                " <div class='post-meta'>\n" +
+                " <p>Liked by <span>{2}</span> people</p>\n" +
+                " <p><time>{5}</time></p></div>\n" +
+                " <div class='post-interaction'>\n" +
+                " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like liked' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
+                " </div>\n" +
+                " </div>\n" +
+                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name));
+            $("#post_creation").after(html_to_add);
+        }
+        else{
+
+            html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
+                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
+                " </div>\n" +
+                " </div>\n" +
+                " <div class='col-sm-10 no_pad'>\n" +
+                " <div class='col-sm-12 container_card template_padding'><p>\n" +
+                " {1}" +
+                " </p>\n" +
+                " <div class='post-meta'>\n" +
+                " <p>Liked by <span>{2}</span> people</p>\n" +
+                " <p><time>{5}</time></p></div>\n" +
+                " <div class='post-interaction'>\n" +
+                " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
+                " </div>\n" +
+                " </div>\n" +
+                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name));
             $("#post_creation").after(html_to_add);
         }
     });
