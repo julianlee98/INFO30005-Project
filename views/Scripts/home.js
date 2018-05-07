@@ -50,7 +50,7 @@ function postData2(n_posts){
             var test = [];
             var item = new postEmailOb(p[0].posts[n_posts.value], data);
             test.push(item);
-            generatePosts(test);
+            generatePosts(test, data);
             n_posts.add();
         });
     });
@@ -232,12 +232,14 @@ function a(list){
                 var item = new postEmailOb(post, friend);
                 array.push(item);
             });
-            b(array);
+            $.get("/email", function(data){
+                b(array, data);
+            })
         });
     });
 }
 
-function b(array){
+function b(array, curruser){
     array.sort(function(a, b) {
         var dateA = moment(a.post.date); // ignore upper and lowercase
         var dateB = moment(b.post.date) ; // ignore upper and lowercase
@@ -251,7 +253,7 @@ function b(array){
         // names must be equal
         return 0;
     });
-    generatePosts(array);
+    generatePosts(array, curruser);
 }
 
 
@@ -310,7 +312,7 @@ function generateMyPosts(input, email){
     t();
 };
 
-function generatePosts(input){
+function generatePosts(input, curruser){
     console.log(input.date);
     input.forEach(function(postEmail){
         console.log("ge e n r a t e ");
@@ -321,10 +323,12 @@ function generatePosts(input){
         //Unpack datetime
         var d = new moment(post.date);
         post.likes.forEach(function(like){
-            if(like == email){
+            if(like == curruser){
                 found = 1;
             }
         });
+        console.log(post.Body);
+        console.log(post.likes);
         if(found ==  1){
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
                 " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
