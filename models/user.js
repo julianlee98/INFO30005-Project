@@ -16,7 +16,8 @@ var userSchema = mongoose.Schema(
         "first_name": String,
         "last_name": String,
         "posts" : [Posts],
-        "friends" : [String]
+        "friends" : [String],
+        "about" : String
     }
 );
 

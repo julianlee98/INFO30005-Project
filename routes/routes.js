@@ -66,6 +66,7 @@ router.get('/friends', function(req, res){
 });
 
 
+
 router.post("/newPost", function(req, res){
     if(!req.session.user){
         return res.status(401).send();
@@ -137,6 +138,17 @@ router.get('/profile', function (req, res) {
 
 });
 
+router.post('/otherProfile', function (req, res) {
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+
+    var user = req.body.user;
+    res.render("profile", {user: user} );
+    window.location.href = "/otherProfile";
+    return res.status(200).send();
+});
+
 
 router.get('/loginIncorrect', function (req, res){
    res.render("loginIncorrect");
@@ -163,5 +175,28 @@ router.get('/workout_search', function (req, res) {
     res.render("workout_search");
 });
 
+var globalSearch;
+
+router.get('/userSearch', function (req, res){
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+    res.render("userSearch");
+});
+
+
+router.post("/newSearch", function (req, res){
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+    var search = req.body.toSearch;
+    globalSearch = search;
+    return res.status(200).send();
+});
+
+
+router.get("/searchInfo", function(req,res){
+    res.send(globalSearch);
+});
 
 module.exports = router;

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/jquery/jquery.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="myCss/mainstylesheet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Metrophobic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
+    <meta charset = "UTF-8">
+    <title>User Search</title>
+
+
+    <!--Custom Javascript for make post and follow accept/reject-->
+    <!--Make post submit works just as an example of functionality-->
+    <script src = "/link_js/userSearch.js"></script>
+
+</head>
+<body>
+
+<div class = "wrapper">
+
+    <!--SideBar-->
+    <div id = "sidebar-wrapper">
+        <ul class = "sidebar-nav">
+            <a href="home" title="Home">
+                <li><img src="/link_images/home.png" width="30%" height="30%"></li>
+            </a>
+            <a href="profile" title="Profile">
+                <li><img src="/link_images/user.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_builder" title="Workout Builder">
+                <li><img src="/link_images/one-dumbbell.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_search" title="Workout Search">
+                <li><img src="/link_images/search.png" width="30%" height="30%"></li>
+            </a>
+            <a href="settings" title="Settings">
+                <li><img src="/link_images/settings-gears.png" width="30%" height="30%"></li>
+            </a>
+        </ul>
+    </div>
+
+
+    <!--Newsfeed Content-->
+    <div id = "page-content-wrapper">
+
+        <!--Heading-->
+        <div class="container-fluid basic_card dropdown template_padding">
+            <div class = "major_title"> <b>User Search</b> </div>
+        </div>
+
+        <!--Search Bar-->
+        <div class="container-fluid cardcontainer dropdown insertAfter">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Users...">
+                <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">Search</button>
+          </span>
+            </div>
+        </div>
+
+        <!--Example Row of User Search Results-->
+        <div class="container-fluid cardcontainer dropdown norm_posts row-eq-height">
+            <!--User Search Result-->
+            <div class="col-sm-2 no_pad">
+                <div class="col-sm-12 container_card center_text">
+                    <img class="profile-picture" src="/link_images/user.png">
+                    <div>Jeff Tong</div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 no_pad">
+                <div class="col-sm-12 container_card template_padding">
+                    <p>Trying to lose enough weight to fit into a latex bodysuit, Join me on my journey!</p>
+                </div>
+            </div>
+            <!--User Search Result-->
+            <div class="col-sm-2 no_pad">
+                <div class="col-sm-12 container_card center_text">
+                    <img class="profile-picture" src="/link_images/user.png">
+                    <div>Julian Lee</div>
+                </div>
+            </div>
+            <div class="col-sm-4 no_pad">
+                <div class="col-sm-12 container_card template_padding">
+                    <p>Trying to lose enough weight to fit into a latex bodysuit, Join me on my journey!</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Example Row of User Search Results-->
+        <div class="container-fluid cardcontainer dropdown norm_posts row-eq-height">
+            <!--User Search Result-->
+            <div class="col-sm-2 no_pad">
+                <div class="col-sm-12 container_card center_text">
+                    <img class="profile-picture" src="/link_images/user.png">
+                    <div>Julian Lee</div>
+                </div>
+            </div>
+            <div class="col-sm-4 no_pad">
+                <div class="col-sm-12 container_card template_padding">
+                    <p>Trying to lose enough weight to fit into a latex bodysuit, Join me on my journey!</p>
+                </div>
+            </div>
+            <!--User Search Result-->
+            <div class="col-sm-2 no_pad">
+                <div class="col-sm-12 container_card center_text">
+                    <img class="profile-picture" src="/link_images/user.png">
+                    <div><a href='javascript:void(0)' class = "userLink" data-content = "test@test.com"> Link </a></div>
+                </div>
+            </div>
+            <div class="col-sm-4 no_pad">
+                <div class="col-sm-12 container_card template_padding">
+                    <p>Trying to lose enough weight to fit into a latex bodysuit, Join me on my journey!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

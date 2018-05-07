@@ -128,6 +128,7 @@
       "resolved": "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz",
       "version": "0.5.2"
     },
+    "fuse.js": "^3.2.0",
     "glyphicons": "^0.2.0",
     "http-errors": {
       "dependencies": {

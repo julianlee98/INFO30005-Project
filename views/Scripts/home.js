@@ -169,6 +169,27 @@ $(document).ready(function(){
     $("#friend2").click(function(){
         $(".follow-request").hide();
     });
+
+    $(".search_btn").click(function(){
+        var search = $(".search_field").val();
+        console.log(search);
+        $.ajax({
+            type:    "POST",
+            url:     "/newSearch",
+            data:    {"toSearch" : search},
+            success: function(data) {
+                console.log("??");
+                window.location.replace("/userSearch");
+            }
+            ,
+            // vvv---- This is the new bit
+            error:   function(jqXHR, textStatus, errorThrown) {
+                alert("Error, status = " + textStatus + ", " +
+                    "error thrown: " + errorThrown
+                );
+            }
+        });
+    });
 });
 
 //https://www.sitepoint.com/jquery-string-template-format-function/
