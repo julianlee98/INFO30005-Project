@@ -129,6 +129,45 @@ router.post("/likePost", function(req, res){
 
 });
 
+
+router.post("/followPerson", function(req, res) {
+    if (!req.session.user) {
+        return res.status(401).send();
+    }
+
+    var email = req.body.email;
+    var follow = req.body.follow;
+
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            if (follow == "true") {
+                user.friends.push(email);
+                console.log(user.friends);
+                console.log("UHH");
+            }
+            else {
+                var x = 0;
+                (user.friends).forEach(function(friend){
+                    if(friend == email){
+                        user.friends.splice(x,1);
+                    }
+                    x+=1;
+                });
+                console.log("UHH");
+                console.log(user.friends);
+            }
+            return user.save();
+        }
+    ).then(function() {
+    })
+        .catch(function (err) {
+
+        })
+
+
+
+});
+
 router.get('/profile', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
@@ -138,14 +177,21 @@ router.get('/profile', function (req, res) {
 
 });
 
-router.post('/otherProfile', function (req, res) {
+var user;
+
+router.post('/otherProfile', function(req,res){
+    user = req.body.user;
+    return res.status(200).send();
+});
+
+
+
+router.get('/otherProfile', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
-
-    var user = req.body.user;
-    res.render("profile", {user: user} );
-    window.location.href = "/otherProfile";
+    console.log(user);
+    res.render("profile", {user: user[0]} );
     return res.status(200).send();
 });
 
