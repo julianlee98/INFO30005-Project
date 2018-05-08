@@ -35,7 +35,7 @@ router.post("/submitSignup", function(req, res){
    var email = req.body.email;
    var password = req.body.password;
 
-   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : ["julianlee98@gmail.com", "test@test.com", "aaaa@aaaa.com"]} , function(err,user){
+   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : []} , function(err,user){
        if(err){
            console.log(err);
            return res.status(500).send();

@@ -537,6 +537,14 @@ hr {
     background-color: #ff751a;
 }
 
+.followed{
+    background-color: #ff751a;
+}
+
+.followed:focus{
+    background-color: #ff751a;
+}
+
 
 .search_table{
     padding-top: 1%;

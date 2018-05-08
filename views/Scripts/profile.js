@@ -1,17 +1,16 @@
 $(document).ready(function(){
+    $.get('/friends', function (user) {
+        user.forEach(function(friend){
+           if($(".btn_follow").data("content") == friend){
+               $(".btn_follow").addClass("followed");
+           }
+        });
+    });
+    a();
+});
+
+function a(){
     $(".btn_follow").click(function () {
-        // $(".btn_follow").toggleClass("btn_focus");
-        // $(".btn_follow").toggleClass("make_btn_orange");
-        // if($(".btn_follow").text() == "Following"){
-        //     $(".btn_follow").text("Follow");
-        // }
-        // else{
-        //     $(".btn_follow").text("Following");
-        // }
-
-
-
-
         //Button will either have the followed tag or won't
         if($(this).hasClass("followed")){
             $.ajax({
@@ -41,6 +40,6 @@ $(document).ready(function(){
                 }
             });
         }
+        $(this).toggleClass("followed");
     });
-
-});
+}
