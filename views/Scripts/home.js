@@ -227,19 +227,38 @@ function refreshPosts(){
 
 
 function loopThroughFriends(){
-    $.ajax({
-        type:    "GET",
-        url:     "/friends",
-        success: function(data) {
-            console.log(data);
-            a(data);
-        },
-        error:   function(jqXHR, textStatus, errorThrown) {
-            alert("Error, status = " + textStatus + ", " +
-                "error thrown: " + errorThrown
-            );
-        }
+    var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
+
+    $.get('/email', function(data){
+        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
+        $.ajax({
+            type:    "GET",
+            url:     requestWithEmail,
+            success: function(data) {
+                a(data[0].friends);
+            },
+            error:   function(jqXHR, textStatus, errorThrown) {
+                alert("Error, status = " + textStatus + ", " +
+                    "error thrown: " + errorThrown
+                );
+            }
+        });
     });
+
+
+    // $.ajax({
+    //     type:    "GET",
+    //     url:     "/friends",
+    //     success: function(data) {
+    //         console.log(data);
+    //         a(data);
+    //     },
+    //     error:   function(jqXHR, textStatus, errorThrown) {
+    //         alert("Error, status = " + textStatus + ", " +
+    //             "error thrown: " + errorThrown
+    //         );
+    //     }
+    // });
 }
 
 function a(list){
@@ -334,7 +353,6 @@ function generateMyPosts(input, email){
 };
 
 function generatePosts(input, curruser){
-    console.log(input.date);
     input.forEach(function(postEmail){
         console.log("ge e n r a t e ");
         console.log(postEmail);

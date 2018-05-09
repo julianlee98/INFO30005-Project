@@ -34,8 +34,9 @@ router.post("/submitSignup", function(req, res){
    var lastname = req.body.lname;
    var email = req.body.email;
    var password = req.body.password;
+   var about = req.body.about;
 
-   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : []} , function(err,user){
+   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : [email], about : about} , function(err,user){
        if(err){
            console.log(err);
            return res.status(500).send();
@@ -105,7 +106,6 @@ router.post("/likePost", function(req, res){
                user.posts[index].likes.push(req.session.user.email);
                console.log("oh");
                console.log(user.posts[index].likes);
-               res.status(200).send();
            }
            else{
                var x = 0;
@@ -117,8 +117,8 @@ router.post("/likePost", function(req, res){
                });
                console.log("oh");
                console.log(user.posts[index].likes);
-               res.status(200).send()
            }
+           res.status(200).send();
            return user.save();
        }
    ).then(function() {
@@ -156,6 +156,7 @@ router.post("/followPerson", function(req, res) {
                 console.log("UHH");
                 console.log(user.friends);
             }
+            res.status(200).send();
             return user.save();
         }
     ).then(function() {
