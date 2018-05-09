@@ -23,7 +23,6 @@ n_post_ob.prototype.set = function(val)
 
 
 function postData (callback, status, n_posts){
-    console.log("aaaaMM");
     var d = new Date($.now());
     $.ajax({
         type:    "POST",
@@ -50,6 +49,7 @@ function postData2(n_posts){
             var test = [];
             var item = new postEmailOb(p[0].posts[n_posts.value], data);
             test.push(item);
+            console.log(test);
             generatePosts(test, data);
             n_posts.add();
         });
@@ -79,7 +79,6 @@ function t(){
         if( $(this).hasClass("liked")) {
             value -= 1;
             $(this).parent().parent().parent().find("p").find("span").text(value);
-            console.log("decrease");
             $.ajax({
                 type: "POST",
                 url: "/likePost",
@@ -172,7 +171,6 @@ $(document).ready(function(){
 
     $(".search_btn").click(function(){
         var search = $(".search_field").val();
-        console.log(search);
         $.ajax({
             type:    "POST",
             url:     "/newSearch",
@@ -219,7 +217,6 @@ function refreshPosts(){
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
         console.log(requestWithEmail);
         $.get(requestWithEmail, function(p){
-            console.log("wat");
             generateMyPosts(p[0].posts, data);
         });
     });
@@ -264,19 +261,54 @@ function loopThroughFriends(){
 function a(list){
     var array = [];
     var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-    console.log(list);
-    list.forEach(function(friend){
+    // list.forEach(function(friend){
+    //     var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, friend);
+    //     $.get(requestWithEmail, function(p){
+    //         (p[0].posts).forEach(function(post){
+    //             var item = new postEmailOb(post, friend);
+    //             array.push(item);
+    //         });
+    //     });
+    // });
+
+    var listOfPromises = [];
+
+    list.forEach(function(friend) {
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, friend);
-        $.get(requestWithEmail, function(p){
-            (p[0].posts).forEach(function(post){
-                var item = new postEmailOb(post, friend);
-                array.push(item);
-            });
-            $.get("/email", function(data){
-                b(array, data);
+
+        listOfPromises.push(
+            new Promise(function(resolve, reject) {
+                $.get(requestWithEmail, function(p){
+                    if(p[0].posts.length == 0){
+                        continue;
+                    }
+                    (p[0].posts).forEach(function(post){
+                        console.log(post);
+                        var item = new postEmailOb(post, friend);
+                        resolve(item);
+                    });
+                });
+
             })
-        });
+
+        )
     });
+
+    // console.log(listOfPromises);
+
+    Promise.all(listOfPromises).then(function(array) {
+        console.log('got all');
+        $.get("/email", function(data){
+            b(array, data);
+        })
+    });
+
+    // $.get("/email", function(data){
+    //     console.log(array);
+    //     console.log(data);
+    //     console.log("^ thise");
+    //     b(array, data);
+    // })
 }
 
 function b(array, curruser){
@@ -353,9 +385,8 @@ function generateMyPosts(input, email){
 };
 
 function generatePosts(input, curruser){
+    console.log("ONLY ONCE THIS ONE HERE");
     input.forEach(function(postEmail){
-        console.log("ge e n r a t e ");
-        console.log(postEmail);
         var email = postEmail.email;
         var post = postEmail.post;
         var found = 0;
@@ -366,8 +397,6 @@ function generatePosts(input, curruser){
                 found = 1;
             }
         });
-        console.log(post.Body);
-        console.log(post.likes);
         if(found ==  1){
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
                 " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
