@@ -35,9 +35,6 @@ function generateWorkouts(){
             });
         },
         error:   function(jqXHR, textStatus, errorThrown) {
-            alert("Error, status = " + textStatus + ", " +
-                "error thrown: " + errorThrown
-            );
         }
     });
 }

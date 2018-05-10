@@ -31,9 +31,6 @@ function postData (callback, status, n_posts){
         },
         // vvv---- This is the new bit
         error:   function(jqXHR, textStatus, errorThrown) {
-            alert("Error, status = " + textStatus + ", " +
-                "error thrown: " + errorThrown
-            );
         }
     });
 
@@ -85,9 +82,6 @@ function t(){
                     console.log("ok");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Error, status = " + textStatus + ", " +
-                        "error thrown: " + errorThrown
-                    );
                 }
             });
         }
@@ -103,9 +97,6 @@ function t(){
                     console.log("ok");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Error, status = " + textStatus + ", " +
-                        "error thrown: " + errorThrown
-                    );
                 }
             });
         }
@@ -180,9 +171,6 @@ $(document).ready(function(){
             ,
             // vvv---- This is the new bit
             error:   function(jqXHR, textStatus, errorThrown) {
-                alert("Error, status = " + textStatus + ", " +
-                    "error thrown: " + errorThrown
-                );
             }
         });
     });
@@ -208,17 +196,6 @@ JQUERY4U.UTIL.formatVarString('{1} is a {2} aimed to help you learn {3}.', 'jQue
 //output: "jQuery4u is a blog aimed to help you learn jQuery.
 
 
-function refreshPosts(){
-    var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-    $.get('/email', function(data){
-        console.log(data);
-        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
-        console.log(requestWithEmail);
-        $.get(requestWithEmail, function(p){
-            generateMyPosts(p[0].posts, data);
-        });
-    });
-}
 
 
 function loopThroughFriends(){
@@ -233,27 +210,9 @@ function loopThroughFriends(){
                 a(data[0].friends);
             },
             error:   function(jqXHR, textStatus, errorThrown) {
-                alert("Error, status = " + textStatus + ", " +
-                    "error thrown: " + errorThrown
-                );
             }
         });
     });
-
-
-    // $.ajax({
-    //     type:    "GET",
-    //     url:     "/friends",
-    //     success: function(data) {
-    //         console.log(data);
-    //         a(data);
-    //     },
-    //     error:   function(jqXHR, textStatus, errorThrown) {
-    //         alert("Error, status = " + textStatus + ", " +
-    //             "error thrown: " + errorThrown
-    //         );
-    //     }
-    // });
 }
 
 function a(list){
@@ -312,63 +271,7 @@ function b(array, curruser){
 }
 
 
-
-function generateMyPosts(input, email){
-    console.log("ge e n r a t e ");
-    input.forEach(function(post){
-        var found = 0;
-        //Unpack datetime
-        var d = new moment(post.date);
-        post.likes.forEach(function(like){
-            if(like == email){
-                found = 1;
-            }
-        });
-        if(found ==  1){
-            html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
-                " </div>\n" +
-                " </div>\n" +
-                " <div class='col-sm-10 no_pad'>\n" +
-                " <div class='col-sm-12 container_card template_padding'><p>\n" +
-                " {1}" +
-                " </p>\n" +
-                " <div class='post-meta'>\n" +
-                " <p>Liked by <span>{2}</span> people</p>\n" +
-                " <p><time>{5}</time></p></div>\n" +
-                " <div class='post-interaction'>\n" +
-                " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like liked' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
-                " </div>\n" +
-                " </div>\n" +
-                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:m a'));
-            $("#post_creation").after(html_to_add);
-        }
-        else{
-
-            html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>Jeff Tong</div>\n" +
-                " </div>\n" +
-                " </div>\n" +
-                " <div class='col-sm-10 no_pad'>\n" +
-                " <div class='col-sm-12 container_card template_padding'><p>\n" +
-                " {1}" +
-                " </p>\n" +
-                " <div class='post-meta'>\n" +
-                " <p>Liked by <span>{2}</span> people</p>\n" +
-                " <p><time>{5}</time></p></div>\n" +
-                " <div class='post-interaction'>\n" +
-                " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
-                " </div>\n" +
-                " </div>\n" +
-                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:mm a'));
-            $("#post_creation").after(html_to_add);
-        }
-    });
-    t();
-};
-
 function generatePosts(input, curruser){
-    console.log("ONLY ONCE THIS ONE HERE");
     input.forEach(function(postEmail){
         if(postEmail.email == "never getting rendered"){
             return;
@@ -385,7 +288,7 @@ function generatePosts(input, curruser){
         });
         if(found ==  1){
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
+                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div><a href = 'javascript:void(0)' class = 'userLink' data-content = '{3}'>{6}</a></div>\n" +
                 " </div>\n" +
                 " </div>\n" +
                 " <div class='col-sm-10 no_pad'>\n" +
@@ -404,7 +307,7 @@ function generatePosts(input, curruser){
         }
         else{
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
+                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div><a href = 'javascript:void(0)' class = 'userLink' data-content = '{3}'>{6}</a></div>\n" +
                 " </div>\n" +
                 " </div>\n" +
                 " <div class='col-sm-10 no_pad'>\n" +
@@ -422,5 +325,32 @@ function generatePosts(input, curruser){
             $("#post_creation").after(html_to_add);
         }
     });
+    clickedUser();
     t();
 };
+
+function clickedUser(){
+    $(".userLink").click(function(){
+        var email = $(this).data("content");
+        var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
+        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, email);
+        $.ajax({
+            type: "GET",
+            url: requestWithEmail,
+            success: function (user) {
+                $.ajax({
+                    type: "POST",
+                    url: "/otherProfile",
+                    data: {"user" : user},
+                    success: function (data) {
+                        window.location.replace("/otherProfile");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                    }
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            }
+        });
+    });
+}

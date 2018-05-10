@@ -63,9 +63,6 @@ function workoutSave(){
         ,
         // vvv---- This is the new bit
         error:   function(jqXHR, textStatus, errorThrown) {
-            alert("Error, status = " + textStatus + ", " +
-                "error thrown: " + errorThrown
-            );
         }
     });
 

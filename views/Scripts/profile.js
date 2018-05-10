@@ -1,6 +1,7 @@
 var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
 
 $(document).ready(function(){
+    disableFollowIfMe();
     followedOrNot();
     generateWorkouts();
     setFollowBehaviour();
@@ -25,12 +26,18 @@ function linkBehaviour(){
                 window.location.replace("/workoutDetails");
             },
             error:   function(jqXHR, textStatus, errorThrown) {
-                alert("Error, status = " + textStatus + ", " +
-                    "error thrown: " + errorThrown
-                );
             }
         });
     })
+}
+
+function disableFollowIfMe(){
+    $.get("/email", function(currEmail) {
+        var email = $(".wrapper").data("content");
+        if(currEmail.trim() == email.trim()){
+            $(".btn_follow").prop("disabled", true);
+        }
+    });
 }
 
 function generateWorkouts(){
@@ -53,9 +60,7 @@ function generateWorkouts(){
             linkBehaviour();
         },
         error:   function(jqXHR, textStatus, errorThrown) {
-            alert("Error, status = " + textStatus + ", " +
-                "error thrown: " + errorThrown
-            );
+
         }
     });
 }
@@ -91,9 +96,6 @@ function followedOrNot(){
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Error, status = " + textStatus + ", " +
-                        "error thrown: " + errorThrown
-                    );
                 }
             });
         });
@@ -110,9 +112,6 @@ function setFollowBehaviour(){
                 success: function (data, textStatus, xhr) {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Error, status = " + textStatus + ", " +
-                        "error thrown: " + errorThrown
-                    );
                 }
             });
         }
@@ -124,9 +123,6 @@ function setFollowBehaviour(){
                 success: function (data, textStatus, xhr) {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Error, status = " + textStatus + ", " +
-                        "error thrown: " + errorThrown
-                    );
                 }
             });
         }
