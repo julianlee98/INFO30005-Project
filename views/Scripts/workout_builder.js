@@ -74,7 +74,6 @@ function workoutSave(){
 
 
 function addWorkout(){
-    console.log("T E S T");
     var exercise = $("#exercise").val();
     var sets = $("#set").val();
     var reps = $("#repetition").val();
