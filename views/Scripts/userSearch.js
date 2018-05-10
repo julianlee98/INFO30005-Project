@@ -72,7 +72,6 @@ function clickedOnName(){
     $(".userLink").click(function(){
         var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
         var email = $(this).data("content");
-        console.log(email);
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, email);
         $.get(requestWithEmail, function(user){
             b(user);

@@ -36,7 +36,7 @@ router.post("/submitSignup", function(req, res){
    var password = req.body.password;
    var about = req.body.about;
 
-   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : [email], about : about} , function(err,user){
+   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : [email], about : about, workouts : []} , function(err,user){
        if(err){
            console.log(err);
            return res.status(500).send();
@@ -191,8 +191,7 @@ router.get('/otherProfile', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
-    console.log(user);
-    res.render("profile", {user: user[0]} );
+    res.render("profile", {user: user[0]});
     return res.status(200).send();
 });
 
@@ -245,5 +244,72 @@ router.post("/newSearch", function (req, res){
 router.get("/searchInfo", function(req,res){
     res.send(globalSearch);
 });
+
+router.post("/newWorkout", function(req, res){
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+
+    var workoutName = req.body.workoutName;
+    var gender = req.body.gender;
+    var duration = req.body.duration;
+    var muscles = req.body.muscles;
+    var intensity = req.body.intensity;
+    var difficulty = req.body.difficulty;
+    var workoutDescription = req.body.workoutDescription;
+    var exercises = req.body.exercises;
+    var equipment = req.body.equipment;
+
+    var workout = {'workoutName' : workoutName, 'gender' : gender, 'duration' : duration, 'muscles' : muscles, 'equipment' : equipment,
+        'intensity' : intensity, 'difficulty' : difficulty, 'workoutDescription' : workoutDescription,
+        'exercises' : exercises};
+
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            console.log(user.workouts);
+            user.workouts.push(workout);
+            console.log("here:");
+            console.log(user.workouts[0]);
+            res.status(200).send();
+            return user.save();
+        }
+    ).then(function() {
+    })
+        .catch(function (err) {
+
+        })
+
+});
+
+var workoutToShow;
+var userToShow;
+
+router.post("/workoutDetails", function(req, res){
+    workoutToShow = req.body.workoutName;
+    userToShow = req.body.email;
+    return res.status(200).send();
+});
+
+router.get("/workoutDetails", function(req, res){
+    var clickedWorkout;
+    User.findOne({email : userToShow}).then(
+        function(user) {
+           var workouts  = user.workouts;
+           workouts.forEach(function(workout){
+              if(workout.workoutName.trim() == workoutToShow.trim()){
+                  clickedWorkout = workout;
+              }
+           });
+           res.render("workoutDetails", {workout: clickedWorkout, user: user});
+           return res.status(200).send();
+        }
+    ).then(function() {
+    })
+        .catch(function (err) {
+
+        })
+});
+
+
 
 module.exports = router;

@@ -9,6 +9,18 @@ var Posts = mongoose.Schema({
     "last_name" : String
 });
 
+var Workouts = mongoose.Schema({
+    "workoutName" : String,
+    "gender" : String,
+    "duration" : String,
+    "muscles" : String,
+    "equipment" : String,
+    "intensity": String,
+    "difficulty" : String,
+    "workoutDescription" : String,
+    "exercises" : String
+});
+
 var userSchema = mongoose.Schema(
     {
         "email": String,
@@ -17,7 +29,8 @@ var userSchema = mongoose.Schema(
         "last_name": String,
         "posts" : [Posts],
         "friends" : [String],
-        "about" : String
+        "about" : String,
+        "workouts" : [Workouts]
     }
 );
 

@@ -4,8 +4,6 @@ function postEmailOb(post, email)
     this.email = email;
 }
 
-
-
 function n_post_ob()
 {
     this.value = 0;
@@ -14,12 +12,12 @@ function n_post_ob()
 n_post_ob.prototype.add = function()
 {
     this.value++;
-}
+};
 
 n_post_ob.prototype.set = function(val)
 {
     this.value = val;
-}
+};
 
 
 function postData (callback, status, n_posts){
@@ -259,17 +257,7 @@ function loopThroughFriends(){
 }
 
 function a(list){
-    var array = [];
     var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-    // list.forEach(function(friend){
-    //     var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, friend);
-    //     $.get(requestWithEmail, function(p){
-    //         (p[0].posts).forEach(function(post){
-    //             var item = new postEmailOb(post, friend);
-    //             array.push(item);
-    //         });
-    //     });
-    // });
 
     var listOfPromises = [];
 
@@ -280,7 +268,8 @@ function a(list){
             new Promise(function(resolve, reject) {
                 $.get(requestWithEmail, function(p){
                     if(p[0].posts.length == 0){
-                        continue;
+                        var item = new postEmailOb({"Body" : "test"}, "never getting rendered");
+                        resolve(item);
                     }
                     (p[0].posts).forEach(function(post){
                         console.log(post);
@@ -303,12 +292,6 @@ function a(list){
         })
     });
 
-    // $.get("/email", function(data){
-    //     console.log(array);
-    //     console.log(data);
-    //     console.log("^ thise");
-    //     b(array, data);
-    // })
 }
 
 function b(array, curruser){
@@ -387,6 +370,9 @@ function generateMyPosts(input, email){
 function generatePosts(input, curruser){
     console.log("ONLY ONCE THIS ONE HERE");
     input.forEach(function(postEmail){
+        if(postEmail.email == "never getting rendered"){
+            return;
+        }
         var email = postEmail.email;
         var post = postEmail.post;
         var found = 0;
@@ -417,7 +403,6 @@ function generatePosts(input, curruser){
             $("#post_creation").after(html_to_add);
         }
         else{
-
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
                 " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div>{6}</div>\n" +
                 " </div>\n" +

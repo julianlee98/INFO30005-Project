@@ -17,9 +17,7 @@
 
 </head>
 <body>
-<div class = "wrapper">
-
-
+<div class = "wrapper" data-content = "<%=user.email%>">
     <!--SideBar-->
     <div id = "sidebar-wrapper">
         <ul class = "sidebar-nav">
@@ -92,7 +90,7 @@
 
             <div class="col-sm-6 no_pad">
                 <div class="col-sm-12 container_card template_padding center_text">
-                    Following: 20
+                    Followers: <%=user.friends.length%>
                 </div>
             </div>
         </div>
@@ -101,15 +99,8 @@
         <div class = "container-fluid basic_card_scroll dropdown template_padding">
             <b class="title_text"> Workout plans </b>
             <div class="container-fluid scroll">
-                <div class = "a col-xs-4">
-                    <div class="col-sm-12 center_text">
-                        <div class = "title_text"><b> After work arms</b> </div>
-                        <p> Duration: 50 minutes</p>
-                        <p> Body part: Arms </p>
-                        <p> Intensity: Medium </p>
-                        <p> Difficulty: Intermediate </p>
-                    </div>
-                </div>
+                <!--Insert content after this div-->
+                <div class = "insert_after"> </div>
                 <div class = "a col-xs-4">
                     <div class="col-sm-12 center_text">
                         <div class = "title_text"><b> After work arms</b> </div>

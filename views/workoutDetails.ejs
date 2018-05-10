@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="myCss/mainstylesheet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Syncopate
+" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Metrophobic
+" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative
+" rel="stylesheet">
+    <meta charset = "UTF-8">
+    <title>Workout Name</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js
+"></script>
+</head>
+<body>
+<div class = "wrapper">
+
+    <!--SideBar-->
+    <div id = "sidebar-wrapper">
+        <ul class = "sidebar-nav">
+            <a href="home" title="Home">
+                <li class="active" ><img src="/link_images/home.png" width="30%" height="30%"></li>
+            </a>
+            <a href="profile" title="Profile">
+                <li><img src="/link_images/user.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_builder" title="Workout Builder">
+                <li><img src="/link_images/one-dumbbell.png" width="30%" height="30%"></li>
+            </a>
+            <a href="workout_search" title="Workout Search">
+                <li><img src="/link_images/search.png" width="30%" height="30%"></li>
+            </a>
+            <a href="settings" title="Settings">
+                <li><img src="/link_images/settings-gears.png" width="30%" height="30%"></li>
+            </a>
+        </ul>
+    </div>
+
+    <!--Workout Details-->
+    <div id="page-content-wrapper">
+
+        <div class="container-fluid cardcontainer dropdown norm_posts row-eq-height">
+            <!--Workout Title & Description-->
+            <div class="col-sm-4 no_pad">
+                <div class="col-sm-12 container_card">
+                    <h2><%= workout.workoutName %></h2>
+                    <p class="post-meta">By <%= user.first_name + " " + user.last_name%></p>
+                    <p>This is a chest workout made for promoting muscle growth</p>
+                </div>
+            </div>
+
+            <!--Workout Metadata-->
+            <div class="col-sm-8 no_pad">
+                <div class="col-sm-12 container_card">
+                    <h2>Workout Details</h2>
+                    <table class="table">
+                        <tr>
+                            <th>Gender</th>
+                            <td><%= workout.gender%></td>
+                        </tr>
+                        <tr>
+                            <th>Duration</th>
+                            <td><%= workout.duration%> minutes</td>
+                        </tr>
+                        <tr>
+                            <th>Difficulty</th>
+                            <td><%= workout.difficulty%></td>
+                        </tr>
+                        <tr>
+                            <th>Intensity</th>
+                            <td><%= workout.intensity%></td>
+                        </tr>
+                        <tr>
+                            <th>Muscle Groups</th>
+                            <td><%= workout.muscles%></td>
+                        </tr>
+                        <tr>
+                            <th>Equipment</th>
+                            <td><%= workout.equipment%></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--Workout Exercises-->
+        <div class = "container-fluid basic_card_scroll dropdown template_padding">
+            <h2>Exercises</h2>
+            <div class="container-fluid scroll">
+                <div class = "a col-xs-4">
+                    <div class="col-sm-12 center_text">
+                        <div class = "title_text"><b>Bench Press</b> </div>
+                        <p> Sets: 5</p>
+                        <p> Repetitions: 3 </p>
+                        <p> Rest: 2 minutes </p>
+                    </div>
+                </div>
+                <div class = "a col-xs-4">
+                    <div class="col-sm-12 center_text">
+                        <div class = "title_text"><b>Incline Dumbbell Press</b> </div>
+                        <p> Sets: 5</p>
+                        <p> Repetitions: 6 </p>
+                        <p> Rest: 2 minutes </p>
+                    </div>
+                </div>
+                <div class = "a col-xs-4">
+                    <div class="col-sm-12 center_text">
+                        <div class = "title_text"><b>Decline Bench Press</b> </div>
+                        <p> Sets: 5</p>
+                        <p> Repetitions: 8 </p>
+                        <p> Rest: 2 minutes </p>
+                    </div>
+                </div>
+                <div class = "a col-xs-4">
+                    <div class="col-sm-12 center_text">
+                        <div class = "title_text"><b>Dumbbell Flyes</b> </div>
+                        <p> Sets: 5</p>
+                        <p> Repetitions: 12 </p>
+                        <p> Rest: 2 minutes </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

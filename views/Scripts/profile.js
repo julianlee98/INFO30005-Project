@@ -1,32 +1,22 @@
-$(document).ready(function(){
-    // $.get('/friends', function (user) {
-    //     console.log("Here");
-    //     console.log(user);
-    //     user.forEach(function(friend){
-    //         console.log($(".btn_follow").data("content"));
-    //         console.log(friend);
-    //        if($(".btn_follow").data("content") == friend){
-    //            $(".btn_follow").addClass("followed");
-    //        }
-    //     });
-    // });
+var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
 
-    var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-    $.get('/email', function(data){
-        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
+$(document).ready(function(){
+    followedOrNot();
+    generateWorkouts();
+    setFollowBehaviour();
+});
+
+
+function linkBehaviour(){
+    $(".workoutLink").click(function(){
+        var email = $(".wrapper").data("content");
+        var workoutName = $(this).text();
         $.ajax({
-            type:    "GET",
-            url:     requestWithEmail,
+            type:    "POST",
+            url:     "/workoutDetails",
+            data: {"workoutName" : workoutName, "email" :email},
             success: function(data) {
-                var flist= data[0].friends;
-                console.log(flist);
-                flist.forEach(function(friend){
-                    console.log($(".btn_follow").data("content"));
-                    console.log(friend);
-                    if($(".btn_follow").data("content") == friend){
-                        $(".btn_follow").addClass("followed");
-                    }
-                });
+                window.location.replace("/workoutDetails");
             },
             error:   function(jqXHR, textStatus, errorThrown) {
                 alert("Error, status = " + textStatus + ", " +
@@ -34,12 +24,76 @@ $(document).ready(function(){
                 );
             }
         });
+    })
+}
+
+function generateWorkouts(){
+    var email = $(".wrapper").data("content");
+    var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, email);
+    $.ajax({
+        type:    "GET",
+        url:     requestWithEmail,
+        success: function(data) {
+            var workouts = data[0].workouts;
+            workouts.forEach(function(workout){
+                var workoutName = workout.workoutName;
+                var duration = workout.duration;
+                var muscles = workout.muscles;
+                var intensity = workout.intensity;
+                var difficulty = workout.difficulty;
+                var htmlToAdd = JQUERY4U.UTIL.formatVarString(template, workoutName, duration, muscles, intensity, difficulty);
+                $(".insert_after").after(htmlToAdd);
+            });
+            linkBehaviour();
+        },
+        error:   function(jqXHR, textStatus, errorThrown) {
+            alert("Error, status = " + textStatus + ", " +
+                "error thrown: " + errorThrown
+            );
+        }
     });
+}
 
-    a();
-});
+var template =  "<div class = \"a col-xs-4\">\n" +
+    "                    <div class=\"col-sm-12 center_text\">\n" +
+    "                        <div class = \"title_text\"><b><a href = 'javascript:void(0)' class = 'workoutLink'>{1} </a> </b> </div>\n" +
+    "                        <p> Duration: {2} minutes</p>\n" +
+    "                        <p> Body part: {3} </p>\n" +
+    "                        <p> Intensity: {4} </p>\n" +
+    "                        <p> Difficulty: {5} </p>\n" +
+    "                    </div>\n" +
+    "                </div>";
 
-function a(){
+
+
+
+function followedOrNot(){
+        $.get("/email", function(email) {
+            var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, email);
+            $.ajax({
+                type: "GET",
+                url: requestWithEmail,
+                success: function (data) {
+                    var flist = data[0].friends;
+                    console.log(flist);
+                    flist.forEach(function (friend) {
+                        console.log($(".btn_follow").data("content"));
+                        console.log(friend);
+                        if ($(".btn_follow").data("content") == friend) {
+                            $(".btn_follow").addClass("followed");
+                        }
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error, status = " + textStatus + ", " +
+                        "error thrown: " + errorThrown
+                    );
+                }
+            });
+        });
+}
+
+function setFollowBehaviour(){
     $(".btn_follow").click(function () {
         //Button will either have the followed tag or won't
         if($(this).hasClass("followed")){
@@ -73,6 +127,16 @@ function a(){
         $(this).toggleClass("followed");
     });
 }
+
+
+
+
+
+
+
+
+
+
 //https://www.sitepoint.com/jquery-string-template-format-function/
 
 var JQUERY4U = {};
