@@ -4,8 +4,14 @@ $(document).ready(function(){
     followedOrNot();
     generateWorkouts();
     setFollowBehaviour();
+    addWorkoutButton();
 });
 
+function addWorkoutButton(){
+    $(".addWorkout").click(function(){
+       window.location.replace("/workout_builder");
+    });
+}
 
 function linkBehaviour(){
     $(".workoutLink").click(function(){

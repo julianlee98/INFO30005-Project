@@ -460,6 +460,7 @@ hr {
     background-color: rgba(241, 241, 241, 0.8);
     max-height: 169px;
     max-width: 270px;
+    margin-right: 1%;
 }
 
 
@@ -549,6 +550,8 @@ hr {
 .search_table{
     padding-top: 1%;
 }
+
+.addWorkout{ cursor: pointer; }
 
 
 
