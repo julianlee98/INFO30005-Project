@@ -136,39 +136,90 @@
                 <!--</form>-->
             </div>
         </div>
-        <div class = "container-fluid basic_card dropdown exercises">
-            <!--Workout Exercises-->
-            <h2 class = "template_padding col-sm-12">Exercises</h2>
-            <div class="exercise-layout">
-                <!--<form action = "\newExercise">-->
-                    <!--Exercises-->
-                    <div class="form-group col-sm-12">
-                        <label for="exercise">Exercise</label>
-                        <input name="exercise_name" type="search" class="form-control input-text"
-                               id="exercise" placeholder="Enter exercise">
+        <!--<div class = "container-fluid basic_card dropdown exercises">-->
+            <!--&lt;!&ndash;Workout Exercises&ndash;&gt;-->
+            <!--<h2 class = "template_padding col-sm-12">Exercises</h2>-->
+            <!--<div class="exercise-layout">-->
+                <!--&lt;!&ndash;<form action = "\newExercise">&ndash;&gt;-->
+                    <!--&lt;!&ndash;Exercises&ndash;&gt;-->
+                    <!--<div class="form-group col-sm-12">-->
+                        <!--<label for="exercise">Exercise</label>-->
+                        <!--<input name="exercise_name" type="search" class="form-control input-text"-->
+                               <!--id="exercise" placeholder="Enter exercise">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Sets&ndash;&gt;-->
+                    <!--<div class="form-group col-sm-12">-->
+                        <!--<label for="set">Sets</label>-->
+                        <!--<input type="number" class="form-control input-number" id="set">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Repetitions&ndash;&gt;-->
+                    <!--<div class="form-group col-sm-12">-->
+                        <!--<label for="repetition">Repetitions</label>-->
+                        <!--<input type="number" class="form-control input-number" id="repetition">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Rest&ndash;&gt;-->
+                    <!--<div class="form-group col-sm-12">-->
+                        <!--<label for="rest">Rest (in seconds)</label>-->
+                        <!--<input type="number" class="form-control input-number" id="rest">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Add to workout&ndash;&gt;-->
+                    <!--<div class="button form-group">-->
+                        <!--<button type="button" class="btn btn-default add-to-workout">Add to workout</button>-->
+                    <!--</div>-->
+                <!--&lt;!&ndash;</form>&ndash;&gt;-->
+            <!--</div>-->
+            <!--&lt;!&ndash;Workout form&ndash;&gt;-->
+        <!--</div>-->
+
+        <!--Playlist-->
+        <div class="container-fluid cardcontainer dropdown row-eq-height">
+
+            <div class="col-sm-8 no_pad exercises">
+                <div class="col-sm-12 container_card template_padding2">
+                    <!--Workout Exercises-->
+                    <h2 class = "template_padding col-sm-12">Exercises</h2>
+                    <div class="exercise-layout">
+                        <!--<form action = "\newExercise">-->
+                        <!--Exercises-->
+                        <div class="form-group col-sm-12">
+                            <label for="exercise">Exercise</label>
+                            <input name="exercise_name" type="search" class="form-control input-text"
+                                   id="exercise" placeholder="Enter exercise">
+                        </div>
+                        <!--Sets-->
+                        <div class="form-group col-sm-12">
+                            <label for="set">Sets</label>
+                            <input type="number" class="form-control input-number" id="set">
+                        </div>
+                        <!--Repetitions-->
+                        <div class="form-group col-sm-12">
+                            <label for="repetition">Repetitions</label>
+                            <input type="number" class="form-control input-number" id="repetition">
+                        </div>
+                        <!--Rest-->
+                        <div class="form-group col-sm-12">
+                            <label for="rest">Rest (in seconds)</label>
+                            <input type="number" class="form-control input-number" id="rest">
+                        </div>
+                        <!--Add to workout-->
+                        <div class="button form-group">
+                            <button type="button" class="btn btn-default add-to-workout">Add to workout</button>
+                        </div>
+                        <!--</form>-->
                     </div>
-                    <!--Sets-->
-                    <div class="form-group col-sm-12">
-                        <label for="set">Sets</label>
-                        <input type="number" class="form-control input-number" id="set">
-                    </div>
-                    <!--Repetitions-->
-                    <div class="form-group col-sm-12">
-                        <label for="repetition">Repetitions</label>
-                        <input type="number" class="form-control input-number" id="repetition">
-                    </div>
-                    <!--Rest-->
-                    <div class="form-group col-sm-12">
-                        <label for="rest">Rest (in seconds)</label>
-                        <input type="number" class="form-control input-number" id="rest">
-                    </div>
-                    <!--Add to workout-->
-                    <div class="button form-group">
-                        <button type="button" class="btn btn-default add-to-workout">Add to workout</button>
-                    </div>
-                <!--</form>-->
+                </div>
             </div>
-            <!--Workout form-->
+
+            <!--Profile updates-->
+            <div class="col-sm-4 no_pad">
+                <div class="col-sm-12 container_card_scrollable2 template_padding2 ">
+                    <div class = "title_text3"> <b> Exercises In Workout </b></div>
+                    <hr class = "add_exercises_after">
+                    <!--New exercises added here-->
+                </div>
+
+            </div>
+
         </div>
 
         <div class = "container-fluid basic_card dropdown template_padding">

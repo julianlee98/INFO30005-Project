@@ -327,6 +327,8 @@ function generatePosts(input, curruser){
     });
     clickedUser();
     t();
+    //Remove loader
+    $(".loaderContainer").remove();
 };
 
 function clickedUser(){

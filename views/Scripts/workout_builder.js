@@ -59,6 +59,7 @@ function workoutSave(){
         "intensity" : intensity, "difficulty" : difficulty, "workoutDescription" : workoutDescription,
             "exercises" : JSON.stringify(exercises)},
         success: function(data) {
+            window.location.replace("/workout_builder");
         }
         ,
         // vvv---- This is the new bit
@@ -78,12 +79,34 @@ function addWorkout(){
 
     var newExercise = new exerciseObject(exercise, sets, reps, rest);
     exercises.push(newExercise);
+
+    // Clear fields
     $("#exercise").val("");
     $("#set").val("");
     $("#repetition").val("");
     $("#rest").val("");
+    // $("#workoutName").val("");
+    // $("#duration").val("");
+    // $("#muscle-group").val("");
+    // $('#equipment').val("");
+    // $('#aboutText').val("");
 
+    html_to_add = JQUERY4U.UTIL.formatVarString(template, exercise, sets, reps);
+    $(".add_exercises_after").after(html_to_add);
 }
+
+
+var template = "<div class=\" basic_smoll container\">\n" +
+    "                            <div class=\"row\">\n" +
+    "                                <div class = \"col-sm-6\"> <b> {1} </b> </div>\n" +
+    "                                <div class = \"col-sm-3 e\"> Sets {2} </div>\n" +
+    "                                <div class = \"col-sm-3 e\"> Reps {3} </div>\n" +
+    "                            </div>\n" +
+    "                    </div> ";
+
+
+
+
 
 //https://www.sitepoint.com/jquery-string-template-format-function/
 
