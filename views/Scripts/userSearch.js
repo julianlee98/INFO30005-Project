@@ -6,7 +6,6 @@ $(document).ready(function(){
 function generateResults(){
     var request = 'https://api.mlab.com/api/1/databases/webtech_project/collections/users?apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5'
     $.get(request, function(data){
-        console.log(data);
         callback(data);
     });
 }
@@ -32,7 +31,6 @@ function callback(data){
 }
 
 function a(result){
-    console.log(result);
     var x = 0;
     var string = "";
     if(result.length % 2 == 0){
@@ -74,13 +72,14 @@ function clickedOnName(){
         var email = $(this).data("content");
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, email);
         $.get(requestWithEmail, function(user){
-            b(user);
+            goToUserProfile(user);
         })
     })
 
 }
 
-function  b(user) {
+function  goToUserProfile(user) {
+    //First posts the user information to the router (which then assigns its current user in question to that user) before loading the page with GET
     $.ajax({
         type:    "POST",
         url:     "/otherProfile",

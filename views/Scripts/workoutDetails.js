@@ -23,7 +23,6 @@ function generateWorkouts(){
                 }
             });
             var exercises = JSON.parse(workoutToProcess.exercises);
-            console.log(exercises);
             // loop through exercise array to add each exercise to the html
             exercises.forEach(function(currExercise){
                 var exerciseName = currExercise.exercise;

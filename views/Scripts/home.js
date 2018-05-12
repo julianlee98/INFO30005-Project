@@ -1,55 +1,37 @@
+//READ THIS//
+//------------//
+//There is functionality not yet working and placeholders are still there.
+//However all the backend required is finished.
+//Full usage of it will be done by final submission
+//-------------//
+
+//Having a structure like this allows for each post to effectively have an account tied to it
 function postEmailOb(post, email)
 {
     this.post = post;
     this.email = email;
 }
 
+//Used as a workaround so that the number of posts in the array can be kept track of internally
+//This is used in post data to get the last post in the users post array
 function n_post_ob()
 {
     this.value = 0;
 }
 
+//Increment value
 n_post_ob.prototype.add = function()
 {
     this.value++;
 };
 
+//Set value
 n_post_ob.prototype.set = function(val)
 {
     this.value = val;
 };
 
-
-function postData (callback, status, n_posts){
-    var d = new Date($.now());
-    $.ajax({
-        type:    "POST",
-        url:     "/newPost",
-        data:    {"Body": status, "likes" : 0, "date": d.toString() },
-        success: function(data, textStatus, xhr) {
-            callback(n_posts);
-        },
-        // vvv---- This is the new bit
-        error:   function(jqXHR, textStatus, errorThrown) {
-        }
-    });
-
-}
-
-function postData2(n_posts){
-    $.get('/email', function(data){
-        var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
-        $.get(requestWithEmail, function(p){
-            var test = [];
-            var item = new postEmailOb(p[0].posts[n_posts.value], data);
-            test.push(item);
-            console.log(test);
-            generatePosts(test, data);
-            n_posts.add();
-        });
-    });
-};
+// Post logic ----------------------------------------
 
 function newPost(to_set, callback){
     $.get('/email', function(data){
@@ -62,12 +44,47 @@ function newPost(to_set, callback){
     });
 }
 
+function postData (callback, status, n_posts){
+    var d = new Date($.now());
+    $.ajax({
+        type:    "POST",
+        url:     "/newPost",
+        data:    {"Body": status, "likes" : 0, "date": d.toString() },
+        success: function(data, textStatus, xhr) {
+            callback(n_posts);
+        },
+        error:   function(jqXHR, textStatus, errorThrown) {
+        }
+    });
+
+}
+
+function postData2(n_posts){
+    $.get('/email', function(data){
+        var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
+        var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, data);
+        $.get(requestWithEmail, function(user){
+            var test = [];
+            //Gets the item we just added from the database
+            var item = new postEmailOb(user[0].posts[n_posts.value], data);
+            //Always a one elem array
+            test.push(item);
+            generatePosts(test, data);
+            n_posts.add();
+        });
+    });
+};
+
 
 function set_n_post(to_set,n_posts){
     to_set.set(n_posts);
 };
 
-function t(){
+//End of post logic ---------------------------------------
+
+
+
+function likeBehaviour(){
     $(".like").click(function(){
         var onScreen = $(this).parent().parent().parent().find("p").find("span").text();
         var value = parseInt(onScreen);
@@ -79,7 +96,6 @@ function t(){
                 url: "/likePost",
                 data: {"email": $(this).data("content"), "index": $(this).data("index"), "add": "false"},
                 success: function (data, textStatus, xhr) {
-                    console.log("ok");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                 }
@@ -88,13 +104,11 @@ function t(){
         else{
             value += 1;
             $(this).parent().parent().parent().find("p").find("span").text(value);
-            console.log("increase");
             $.ajax({
                 type: "POST",
                 url: "/likePost",
                 data: {"email": $(this).data("content"), "index": $(this).data("index"), "add": "true"},
                 success: function (data, textStatus, xhr) {
-                    console.log("ok");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                 }
@@ -103,12 +117,10 @@ function t(){
         $(this).toggleClass("liked");
     });
 
-};
+}
 
 
-$(document).ready(function(){
-    // refreshPosts();
-    loopThroughFriends();
+function newPostBehaviour(){
     var n_posts = new n_post_ob();
     newPost(n_posts,set_n_post);
     $("#sub_make_post").click(function(){
@@ -116,7 +128,13 @@ $(document).ready(function(){
         var status = $("#user_input").val();
         postData(postData2, status, n_posts);
     });
+}
 
+
+$(document).ready(function(){
+    // refreshPosts();
+    loopThroughFriends();
+    newPostBehaviour();
     $(document).on('change', '.btn-file :file', function() {
         var input = $(this),
             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -165,7 +183,6 @@ $(document).ready(function(){
             url:     "/newSearch",
             data:    {"toSearch" : search},
             success: function(data) {
-                console.log("??");
                 window.location.replace("/userSearch");
             }
             ,
@@ -175,25 +192,6 @@ $(document).ready(function(){
         });
     });
 });
-
-//https://www.sitepoint.com/jquery-string-template-format-function/
-
-var JQUERY4U = {};
-JQUERY4U.UTIL = {
-    formatVarString: function()
-    {
-        var args = [].slice.call(arguments);
-        if(this.toString() != '[object Object]')
-        {
-            args.unshift(this.toString());
-        }
-
-        var pattern = new RegExp('{([1-' + args.length + '])}','g');
-        return String(args[0]).replace(pattern, function(match, index) { return args[index]; });
-    }
-}
-JQUERY4U.UTIL.formatVarString('{1} is a {2} aimed to help you learn {3}.', 'jQuery4u', 'blog', 'jQuery');
-//output: "jQuery4u is a blog aimed to help you learn jQuery.
 
 
 
@@ -207,7 +205,7 @@ function loopThroughFriends(){
             type:    "GET",
             url:     requestWithEmail,
             success: function(data) {
-                a(data[0].friends);
+                createPostListAndGenerate(data[0].friends);
             },
             error:   function(jqXHR, textStatus, errorThrown) {
             }
@@ -215,11 +213,9 @@ function loopThroughFriends(){
     });
 }
 
-function a(list){
+function createPostListAndGenerate(list){
     var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-
     var listOfPromises = [];
-
     list.forEach(function(friend) {
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, friend);
 
@@ -231,21 +227,15 @@ function a(list){
                         resolve(item);
                     }
                     (p[0].posts).forEach(function(post){
-                        console.log(post);
                         var item = new postEmailOb(post, friend);
                         resolve(item);
                     });
                 });
-
             })
-
         )
     });
 
-    // console.log(listOfPromises);
-
     Promise.all(listOfPromises).then(function(array) {
-        console.log('got all');
         $.get("/email", function(data){
             b(array, data);
         })
@@ -326,11 +316,13 @@ function generatePosts(input, curruser){
         }
     });
     clickedUser();
-    t();
-    //Remove loader
+    likeBehaviour();
+    //Remove loader when the data is loaded
     $(".loaderContainer").remove();
 };
 
+
+//Functionality for user profile links
 function clickedUser(){
     $(".userLink").click(function(){
         var email = $(this).data("content");
@@ -356,3 +348,24 @@ function clickedUser(){
         });
     });
 }
+
+
+//https://www.sitepoint.com/jquery-string-template-format-function/
+
+var JQUERY4U = {};
+JQUERY4U.UTIL = {
+    formatVarString: function()
+    {
+        var args = [].slice.call(arguments);
+        if(this.toString() != '[object Object]')
+        {
+            args.unshift(this.toString());
+        }
+
+        var pattern = new RegExp('{([1-' + args.length + '])}','g');
+        return String(args[0]).replace(pattern, function(match, index) { return args[index]; });
+    }
+}
+JQUERY4U.UTIL.formatVarString('{1} is a {2} aimed to help you learn {3}.', 'jQuery4u', 'blog', 'jQuery');
+//output: "jQuery4u is a blog aimed to help you learn jQuery.
+

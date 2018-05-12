@@ -86,10 +86,7 @@ function followedOrNot(){
                 url: requestWithEmail,
                 success: function (data) {
                     var flist = data[0].friends;
-                    console.log(flist);
                     flist.forEach(function (friend) {
-                        console.log($(".btn_follow").data("content"));
-                        console.log(friend);
                         if ($(".btn_follow").data("content") == friend) {
                             $(".btn_follow").addClass("followed");
                         }
