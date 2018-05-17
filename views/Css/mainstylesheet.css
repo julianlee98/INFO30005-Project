@@ -1,5 +1,7 @@
 body{
     background-image: url("/link_images/bg.jpg");
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
     overflow-y: scroll;
     overflow-x: hidden;
     /*background-color: #22264b;*/
@@ -81,11 +83,22 @@ a{
 }
 
 .cardcontainer{
+     position: relative;
+     width: 75%;
+     height: 45%;
+     margin-top: 1.5%;
+     transition: 0.3s;
+     /*top: -800px;*/
+     padding:0px;
+ }
+
+
+.nomargin_cardcontainer{
     position: relative;
     width: 75%;
     height: 45%;
-    margin-top: 1.5%;
     transition: 0.3s;
+    margin-top: 0.2%;
     /*top: -800px;*/
     padding:0px;
 }
@@ -478,6 +491,7 @@ hr {
     background-color: rgba(241, 241, 241, 0.8);
     max-height: 169px;
     max-width: 270px;
+    min-height: 200px;
     margin-right: 1%;
 }
 

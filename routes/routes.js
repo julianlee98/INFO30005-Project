@@ -222,6 +222,7 @@ router.get('/workout_search', function (req, res) {
 });
 
 var globalSearch;
+var globalWorkoutSearch;
 
 router.get('/userSearch', function (req, res){
     if(!req.session.user){
@@ -243,6 +244,21 @@ router.post("/newSearch", function (req, res){
 
 router.get("/searchInfo", function(req,res){
     res.send(globalSearch);
+    globalSearch = "";
+});
+
+
+router.post("/workoutSearch", function(req,res){
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+    var searchInput = req.body.searchInput;
+    globalWorkoutSearch = searchInput;
+    res.status(200).send();
+});
+
+router.get("/workoutSearch", function(req,res){
+    res.send(globalWorkoutSearch);
 });
 
 router.post("/newWorkout", function(req, res){

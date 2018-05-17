@@ -5,12 +5,13 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/jquery/jquery.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <!--<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>-->
     <link rel="stylesheet" type="text/css" href="myCss/mainstylesheet.css" />
     <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Metrophobic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <link href ="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel= "stylesheet">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js'></script>
     <meta charset = "UTF-8">
     <title>Workout Search</title>
 
@@ -26,240 +27,36 @@
     <!--SideBar-->
     <div id = "sidebar-wrapper">
         <ul class = "sidebar-nav">
-            <a href="home"> <li><img src="/link_images/home.png" width="30%" height="30%">  </li> </a>
-            <a href="profile"> <li> <img src="/link_images/user.png" width="30%" height="30%">  </li> </a>
-            <a href="workout_builder"> <li> <img src="/link_images/one-dumbbell.png" width="30%" height="30%"> </li> </a>
-            <a href="workout_search"> <li class="active">  <img src="/link_images/search.png" width="30%" height="30%"> </li> </a>
-            <a href="settings"> <li> <img src="/link_images/settings-gears.png" width="30%" height="30%"> </li>  </a>
+            <a href="home" title="Home"> <li><img src="/link_images/home.png" width="30%" height="30%">  </li> </a>
+            <a href="profile" title="Profile"> <li> <img src="/link_images/user.png" width="30%" height="30%">  </li> </a>
+            <a href="workout_builder" title="Workout Builder"> <li> <img src="/link_images/one-dumbbell.png" width="30%" height="30%"> </li> </a>
+            <a href="workout_search" title="Workout Search"> <li class="active">  <img src="/link_images/search.png" width="30%" height="30%"> </li> </a>
+            <a href="settings" title="Settings"> <li> <img src="/link_images/settings-gears.png" width="30%" height="30%"> </li>  </a>
         </ul>
     </div>
 
+
+
     <!--Search results table example-->
     <div class = " container-fluid " id = "page-content-wrapper">
+
         <div class="container-fluid basic_card dropdown template_padding">
             <div class = "major_title"> <b>Workout Search</b> </div>
         </div>
-        <div class="container-fluid basic_card dropdown search_table">
-            <table id="example" class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Workout name</th>
-                    <th>Intensity</th>
-                    <th>Muscle groups</th>
-                    <th>Duration</th>
-                    <th>Difficulty</th>
-                    <th>Rating</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Julian Lee</td>
-                    <td>After work arms</td>
-                    <td>Medium</td>
-                    <td>Biceps, Triceps</td>
-                    <td>50 mins</td>
-                    <td>Beginner</td>
-                    <td> 8 </td>
-                </tr>
-                <tr>
-                    <td>Lebron James</td>
-                    <td>Tricep workout</td>
-                    <td>High</td>
-                    <td>Triceps</td>
-                    <td>10 mins</td>
-                    <td>Intermediate</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Intermediate</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Advanced</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Beginner</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Usain Bolt</td>
-                    <td>Training for marathon</td>
-                    <td>High</td>
-                    <td>Calves, Quads, Stamina</td>
-                    <td>2 hours</td>
-                    <td>Advanced</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>Mike Stevens</td>
-                    <td>First training program</td>
-                    <td>Low</td>
-                    <td>Arms</td>
-                    <td>30 mins</td>
-                    <td>Beginner</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Lebron James</td>
-                    <td>Tricep workout</td>
-                    <td>High</td>
-                    <td>Triceps</td>
-                    <td>10 mins</td>
-                    <td>Intermediate</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Intermediate</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Mike Stevens</td>
-                    <td>First training program</td>
-                    <td>Low</td>
-                    <td>Arms</td>
-                    <td>30 mins</td>
-                    <td>Beginner</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Intermediate</td>
-                    <td>9</td>
-                </tr>
 
-                <tr>
-                    <td>Julian Lee</td>
-                    <td>After work arms</td>
-                    <td>Medium</td>
-                    <td>Biceps, Triceps</td>
-                    <td>50 mins</td>
-                    <td>Beginner</td>
-                    <td> 8 </td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Intermediate</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Lebron James</td>
-                    <td>Back workout</td>
-                    <td>High</td>
-                    <td>Lats, Back</td>
-                    <td>80 mins</td>
-                    <td>Advanced</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Advanced</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Intermediate</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Lebron James</td>
-                    <td>Back workout</td>
-                    <td>High</td>
-                    <td>Lats, Back</td>
-                    <td>80 mins</td>
-                    <td>Advanced</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Advanced</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Intermediate</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Leg city</td>
-                    <td>High</td>
-                    <td>Calves, Quads</td>
-                    <td>30 mins</td>
-                    <td>Advanced</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Lebron James</td>
-                    <td>Back workout</td>
-                    <td>High</td>
-                    <td>Lats, Back</td>
-                    <td>80 mins</td>
-                    <td>Advanced</td>
-                    <td>10</td>
-                </tr>
-
-
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th>User</th>
-                    <th>Workout name</th>
-                    <th>Intensity</th>
-                    <th>Muscle groups</th>
-                    <th>Duration</th>
-                    <th>Difficulty</th>
-                    <th>Rating</th>
-                </tr>
-                </tfoot>
-            </table>
+        <div class="container-fluid cardcontainer dropdown">
+            <div class="input-group">
+                <input type="text" class="form-control workoutSearchField" placeholder="Search for workout...">
+                <span class="input-group-btn">
+            <button class="btn btn-secondary workoutSearchBtn" type="button">Search</button>
+          </span>
+            </div>
         </div>
+
+        <div class = "insert_after"></div>
+
     </div>
 </div>
 </body>
 </html>
+
