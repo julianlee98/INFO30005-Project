@@ -156,6 +156,10 @@ a{
     padding-bottom: 1%;
 }
 
+.template_padding3 {
+    padding-top: 1%;
+}
+
 .center_text{
     text-align: center;
 }
@@ -711,4 +715,13 @@ hr {
 .invalidText{
     color: red;
     padding-left: 2.5%;
+}
+
+.playListArea{
+    max-height: 600px;
+    min-height: 600px;
+}
+
+.addSpace{
+    padding-bottom: 40px;
 }

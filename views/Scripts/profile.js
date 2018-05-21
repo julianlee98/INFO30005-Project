@@ -175,7 +175,6 @@ var postTemplate = "<div class=\" basic_smoll\">\n" +
 
 
 
-
 //https://www.sitepoint.com/jquery-string-template-format-function/
 
 var JQUERY4U = {};

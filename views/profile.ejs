@@ -112,20 +112,21 @@
         </div>
 
         <!--Playlist-->
-        <div class="container-fluid cardcontainer dropdown row-eq-height">
+        <div class="container-fluid cardcontainer dropdown row-eq-height addSpace">
 
-            <div class="col-sm-6 no_pad">
-                <div class="col-sm-12 container_card template_padding2 fix">
+            <div class="col-sm-6 no_pad ">
+                <div class="col-sm-12 container_card template_padding2 fix playListArea">
                     <div class = "title_text2">
-                        <b>Julian's playlist </b>
+                        <b><%= user.first_name%>'s playlist </b>
                     </div>
-                    <iframe src="https://tools.applemusic.com/embed/v1/playlist/pl.u-JPj3tWmLe4b?country=au" height="530px" width="100%" frameborder="0"></iframe>
+                    <div> <i> <%= errorString %></i></div>
+                    <iframe src="https://tools.applemusic.com/embed/v1/playlist/<%= user.playlist%>?country=au" height="530px" width="100%" frameborder="0"></iframe>
                 </div>
             </div>
 
             <!--Profile updates-->
             <div class="col-sm-6 no_pad">
-                <div class="col-sm-12 container_card_scrollable template_padding2 ">
+                <div class="col-sm-12 container_card_scrollable template_padding2 playListArea ">
                     <div class = "title_text2"> <b> Latest updates </b></div>
                         <div class = "insert_post_after"></div>
 

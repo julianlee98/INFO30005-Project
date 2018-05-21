@@ -137,6 +137,7 @@ $(document).ready(function(){
     loopThroughFriends();
     newPostBehaviour();
     fileBehaviour();
+    playListBehaviour();
 
     $("#friend").click(function(){
         $(".follow-request").hide();
@@ -267,7 +268,13 @@ function b(array, curruser){
         // names must be equal
         return 0;
     });
-    generatePosts(array, curruser);
+    if(array.length ==1){
+        $("#post_creation").after(noFriends);
+        $(".loaderContainer").remove();
+    }
+    else {
+        generatePosts(array, curruser);
+    }
 }
 
 
@@ -332,6 +339,15 @@ function generatePosts(input, curruser){
 };
 
 
+var noFriends = "<div class=\"container-fluid basic_card dropdown template_padding3 text-center\">\n" +
+    "            <div class=\"template_padding\">\n" +
+    "                <p>\n" +
+    "                    You don't appear to be following anyone. Use the search bar on the top of the page to find people!\n" +
+    "                </p>\n" +
+    "            </div>\n" +
+    "        </div>";
+
+
 //Functionality for user profile links
 function clickedUser(){
     $(".userLink").click(function(){
@@ -359,6 +375,30 @@ function clickedUser(){
     });
 }
 
+
+
+function playListBehaviour() {
+    $("#sub_post_playlist").click(function(){
+        var inputString = $("#playlist_input").val();
+        var n = inputString.lastIndexOf('/');
+        var playListId = inputString.substring(n + 1);
+        console.log(playListId);
+        $.ajax({
+            type: "POST",
+            url: "/setPlaylist",
+            data: {"playlist" : playListId},
+            success: function (data) {
+                $("#playlist_input").val("");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            }
+        });
+    });
+}
+
+//https://itunes.apple.com/au/playlist/ooft/pl.u-76jytNkvrl8
+
+//<iframe src="https://tools.applemusic.com/embed/v1/playlist/pl.u-JPj3tWmLe4b?country=au" height="530px" width="100%" frameborder="0"></iframe>
 
 //https://www.sitepoint.com/jquery-string-template-format-function/
 

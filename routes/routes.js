@@ -185,7 +185,12 @@ router.get('/profile', function (req, res) {
     }
     User.findOne({email : req.session.user.email}).then(
         function(user) {
-            res.render("profile", {user: user} );
+            if(user.playlist == null){
+                res.render("profile", {user: user, errorString : "Please post a playlist from the home page to see it here !"} );
+            }
+            else{
+                res.render("profile", {user: user, errorString: ""} );
+            }
         }
     ).catch(function (err) {
 
@@ -206,8 +211,17 @@ router.get('/otherProfile', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
-    res.render("profile", {user: user[0]});
-    return res.status(200).send();
+    if(user[0].playlist == null){
+        console.log("test");
+        res.render("profile", {user: user[0], errorString : "Please post a playlist from the home page to see it here !"} );
+    }
+    else{
+        console.log("test2");
+        res.render("profile", {user: user[0], errorString: ""} );
+    }
+    console.log("test3");
+    // return res.status(200).send();
+    return;
 });
 
 
@@ -355,6 +369,19 @@ router.post("/newAbout", function (req, res) {
         })
 
 
+});
+
+router.post("/setPlaylist", function(req,res){
+   var playlistid = req.body.playlist;
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            user.playlist = playlistid;
+            res.status(200).send();
+            return user.save();
+        }
+    ).catch(function (err) {
+
+    })
 });
 
 
