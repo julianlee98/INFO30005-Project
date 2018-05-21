@@ -30,6 +30,7 @@ var userSchema = mongoose.Schema(
         "posts" : [Posts],
         "friends" : [String],
         "about" : String,
+        "profileImg": { "data": Buffer, "contentType": String },
         "workouts" : [Workouts]
     }
 );

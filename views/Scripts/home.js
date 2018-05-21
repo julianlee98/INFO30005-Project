@@ -69,6 +69,7 @@ function postData2(n_posts){
             var item = new postEmailOb(user[0].posts[n_posts.value], data);
             //Always a one elem array
             test.push(item);
+            $("#user_input").val("");
             generatePosts(test, data);
             n_posts.add();
         });
@@ -135,39 +136,7 @@ $(document).ready(function(){
     // refreshPosts();
     loopThroughFriends();
     newPostBehaviour();
-    $(document).on('change', '.btn-file :file', function() {
-        var input = $(this),
-            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [label]);
-    });
-
-    $('.btn-file :file').on('fileselect', function(event, label) {
-
-        var input = $(this).parents('.input-group').find(':text'),
-            log = label;
-
-        if( input.length ) {
-            input.val(log);
-        } else {
-            if( log ) alert(log);
-        }
-
-    });
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#img-upload').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
+    fileBehaviour();
 
     $("#friend").click(function(){
         $(".follow-request").hide();
@@ -193,6 +162,47 @@ $(document).ready(function(){
     });
 });
 
+function fileBehaviour(){
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [label]);
+    });
+
+    $('.btn-file :file').on('fileselect', function(event, label) {
+
+        var input = $(this).parents('.input-group').find(':text'),
+            log = label;
+
+        if( input.length ) {
+            input.val(log);
+        } else {
+            if( log ) alert(log);
+        }
+
+    });
+
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            console.log(e.target.result);
+            $('#img-upload').attr('src', e.target.result);
+        }
+
+        //console.log(input.files[0]);
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
 
 
 
@@ -215,33 +225,33 @@ function loopThroughFriends(){
 
 function createPostListAndGenerate(list){
     var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/users?q={%27email%27:%27{1}%27}&apiKey=8UH049mkHoClUyTCFpDiNNKp8BuoGWR5";
-    var listOfPromises = [];
+    var resolveArray = [];
     list.forEach(function(friend) {
         var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, friend);
-
-        listOfPromises.push(
-            new Promise(function(resolve, reject) {
                 $.get(requestWithEmail, function(p){
                     if(p[0].posts.length == 0){
                         var item = new postEmailOb({"Body" : "test"}, "never getting rendered");
-                        resolve(item);
+                        resolveArray.push(item);
                     }
                     (p[0].posts).forEach(function(post){
                         var item = new postEmailOb(post, friend);
-                        resolve(item);
+                        resolveArray.push(item);
                     });
                 });
-            })
-        )
     });
-
-    Promise.all(listOfPromises).then(function(array) {
-        $.get("/email", function(data){
-            b(array, data);
-        })
-    });
+    setTimeout(function() {
+        x(resolveArray);
+    }, 1000)
 
 }
+
+function x(array){
+        $.get("/email", function(data){
+            b(array, data);
+        });
+}
+
+
 
 function b(array, curruser){
     array.sort(function(a, b) {
@@ -289,7 +299,7 @@ function generatePosts(input, curruser){
                 " <p>Liked by <span>{2}</span> people</p>\n" +
                 " <p><time>{5}</time></p></div>\n" +
                 " <div class='post-interaction'>\n" +
-                " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like liked' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
+                " <div class='btn-group'> <a href='javascript:void(0)' class='btn btn-default like liked' data-content = '{3}' data-index = '{4}'>Like</a> </div>" +
                 " </div>\n" +
                 " </div>\n" +
                 " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name));
@@ -308,7 +318,7 @@ function generatePosts(input, curruser){
                 " <p>Liked by <span>{2}</span> people</p>\n" +
                 " <p><time>{5}</time></p></div>\n" +
                 " <div class='post-interaction'>\n" +
-                " <div class='btn-group btn-group-justified'> <a href='javascript:void(0)' class='btn btn-default like' data-content = '{3}' data-index = '{4}'>Like</a> <a href='#' class='btn btn-default'>Comment</a> <a href='#' class='btn btn-default'>Share</a> <a href='#' class='btn btn-default'>View Comments</a> </div>" +
+                " <div class='btn-group '> <a href='javascript:void(0)' class='btn btn-default like' data-content = '{3}' data-index = '{4}'>Like</a> </div>" +
                 " </div>\n" +
                 " </div>\n" +
                 " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name));

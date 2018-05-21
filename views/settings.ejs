@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Metrophobic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <meta charset = "UTF-8">
     <title>Settings</title>
 
+    <script src = "/link_js/settings.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -55,23 +55,10 @@
             <div class="form-layout">
                 <form>
                     <!--Privacy-->
-                    <div class="col-sm-12 form-group">
-                        <div>
-                            <label for="privacyToggle">Privacy</label>
-                        </div>
-                        <div class="btn-group-toggle" data-toggle="buttons" id="privacyToggle">
-                            <label class="btn btn-default active">
-                                <input type="radio" name="options" id="public" autocomplete="off" checked> Public
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="radio" name="options" id="private" autocomplete="off"> Private
-                            </label>
-                        </div>
-                    </div>
-                    <!--About-->
                     <div class="form-group col-sm-12">
-                        <label for="aboutText">About</label>
-                        <textarea class="form-control" id="aboutText" rows="3"></textarea>
+                        <label for="aboutText">Change your profiles "about" section</label>
+                        <textarea class="form-control" id="aboutText" rows="3" placeholder="My new about text..."></textarea>
+                        <button class = "btn btn-default" id = "changeAbout" type= "button">Update</button>
                     </div>
                     <!--Profile Picture-->
                     <div class="form-group col-sm-12">

@@ -613,7 +613,9 @@ hr {
     100% { transform: rotate(360deg); }
 }
 
-
+#changeAbout{
+    margin-top:0.5%
+}
 
 
 

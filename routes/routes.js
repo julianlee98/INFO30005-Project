@@ -51,8 +51,18 @@ router.get('/home', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
-    res.render("home", {user: req.session.user});
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            res.render("home", {user: user});
+            return res.status(200).send();
+        }
+    ).catch(function (err) {
+
+    })
 });
+
+
+
 
 router.get('/posts', function(req, res){
     res.send(req.session.user.posts);
@@ -173,8 +183,13 @@ router.get('/profile', function (req, res) {
     if(!req.session.user){
         return res.status(401).send();
     }
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            res.render("profile", {user: user} );
+        }
+    ).catch(function (err) {
 
-    res.render("profile", {user: req.session.user} );
+    });
 
 });
 
@@ -324,6 +339,22 @@ router.get("/workoutDetails", function(req, res){
         .catch(function (err) {
 
         })
+});
+
+router.post("/newAbout", function (req, res) {
+    var newAbout = req.body.newAbout;
+    console.log(newAbout);
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            user.about = newAbout;
+            res.status(200).send();
+            return user.save();
+        }
+    ).catch(function (err) {
+
+        })
+
+
 });
 
 

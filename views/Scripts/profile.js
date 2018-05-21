@@ -4,6 +4,7 @@ $(document).ready(function(){
     disableFollowIfMe();
     followedOrNot();
     generateWorkouts();
+    generatePosts();
     setFollowBehaviour();
     addWorkoutButton();
 });
@@ -64,6 +65,10 @@ function generateWorkouts(){
         }
     });
 }
+
+
+
+
 
 var template =  "<div class = \"a col-xs-4\">\n" +
     "                    <div class=\"col-sm-12 center_text\">\n" +
@@ -128,7 +133,42 @@ function setFollowBehaviour(){
 }
 
 
+function generatePosts(){
+    var email = $(".wrapper").data("content");
+    var requestWithEmail = JQUERY4U.UTIL.formatVarString(request, email);
+    $.ajax({
+        type:    "GET",
+        url:     requestWithEmail,
+        success: function(data) {
+            var posts = data[0].posts;
+            posts.forEach(function(post){
+                var Body = post.Body;
+                var likes = post.likes.length;
+                var d = new moment(post.date);
+                var htmlToAdd = JQUERY4U.UTIL.formatVarString(postTemplate, Body, likes, d.format('Do MMMM YYYY h:ss a'));
+                $(".insert_post_after").after(htmlToAdd);
+            });
+            linkBehaviour();
+        },
+        error:   function(jqXHR, textStatus, errorThrown) {
 
+        }
+    });
+}
+
+var postTemplate = "<div class=\" basic_smoll\">\n" +
+    "                            <p> {1}" +
+    "                            </p>\n" +
+    "\n" +
+    "                            <div class=\"post-meta\">\n" +
+    "                                <p>Liked by {2} people</p>\n" +
+    "                                <p><time datetime=\"2018-4-15 08:00\">{3}</time></p>\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                            <div class=\"btn-group btn-group-justified\">\n" +
+    "                                <a href=\"#\" class=\"btn btn-default\">Like</a>\n" +
+    "                            </div>\n" +
+    "                        </div>";
 
 
 
