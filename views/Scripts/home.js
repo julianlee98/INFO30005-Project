@@ -1,10 +1,3 @@
-//READ THIS//
-//------------//
-//There is functionality not yet working and placeholders are still there.
-//However all the backend required is finished.
-//Full usage of it will be done by final submission
-//-------------//
-
 //Having a structure like this allows for each post to effectively have an account tied to it
 function postEmailOb(post, email)
 {
@@ -30,6 +23,38 @@ n_post_ob.prototype.set = function(val)
 {
     this.value = val;
 };
+
+$(document).ready(function(){
+    // refreshPosts();
+    loopThroughFriends();
+    newPostBehaviour();
+    fileBehaviour();
+    playListBehaviour();
+    logoutBehaviour();
+
+    $("#friend").click(function(){
+        $(".follow-request").hide();
+    });
+    $("#friend2").click(function(){
+        $(".follow-request").hide();
+    });
+
+    $(".search_btn").click(function(){
+        var search = $(".search_field").val();
+        $.ajax({
+            type:    "POST",
+            url:     "/newSearch",
+            data:    {"toSearch" : search},
+            success: function(data) {
+                window.location.replace("/userSearch");
+            }
+            ,
+            // vvv---- This is the new bit
+            error:   function(jqXHR, textStatus, errorThrown) {
+            }
+        });
+    });
+});
 
 // Post logic ----------------------------------------
 
@@ -132,36 +157,6 @@ function newPostBehaviour(){
 }
 
 
-$(document).ready(function(){
-    // refreshPosts();
-    loopThroughFriends();
-    newPostBehaviour();
-    fileBehaviour();
-    playListBehaviour();
-
-    $("#friend").click(function(){
-        $(".follow-request").hide();
-    });
-    $("#friend2").click(function(){
-        $(".follow-request").hide();
-    });
-
-    $(".search_btn").click(function(){
-        var search = $(".search_field").val();
-        $.ajax({
-            type:    "POST",
-            url:     "/newSearch",
-            data:    {"toSearch" : search},
-            success: function(data) {
-                window.location.replace("/userSearch");
-            }
-            ,
-            // vvv---- This is the new bit
-            error:   function(jqXHR, textStatus, errorThrown) {
-            }
-        });
-    });
-});
 
 function fileBehaviour(){
     $(document).on('change', '.btn-file :file', function() {
@@ -392,6 +387,14 @@ function playListBehaviour() {
             },
             error: function (jqXHR, textStatus, errorThrown) {
             }
+        });
+    });
+}
+
+function logoutBehaviour(){
+    $("#logout").click(function(){
+        $.post("/logout", function(){
+            window.location.replace("/login");
         });
     });
 }

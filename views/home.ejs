@@ -48,6 +48,9 @@
 
     <!--Newsfeed Content-->
     <div id = "page-content-wrapper">
+
+        <button class = "btn btn-default orange" type = "button" id = "logout">Logout </button>
+
         <div class="container-fluid cardcontainer dropdown">
             <div class="input-group">
                 <input type="text" class="form-control search_field" placeholder="Search for users to follow...">
@@ -87,7 +90,7 @@
                 <div id="make_post" class="tab-pane fade in active">
                     <div class = "sub_title"><b> Make post </b></div>
                     <div class = "form-group variable_section text-right">
-                        <textarea class="form-control" rows="5" id = "user_input"></textarea>
+                        <textarea class="form-control" rows="5" id = "user_input" placeholder="How's your fitness journey going today?"></textarea>
                         <button type="button" class="btn btn-default sub" id = "sub_make_post">Submit</button>
                     </div>
                 </div>
@@ -150,9 +153,16 @@
 
                 <!--Tab 4-->
                 <div id="playlist" class="tab-pane fade">
+                    <p> <b> How to add a playlist</b> </p>
+                    <ol>
+                        <li> Right click your apple music playlist in Itunes</li>
+                        <li> Click "Share playlist -> copy link"</li>
+                        <li> Paste the link here and we'll do the rest!</li>
+                    </ol>
+                    <hr>
                     <div class = "sub_title"><b> New playlist </b></div>
                     <div class = "form-group variable_section text-right">
-                        <textarea class="form-control" rows="3" id = "playlist_input"></textarea>
+                        <textarea class="form-control" rows="3" id = "playlist_input" placeholder="https://itunes.apple.com/au/playlist/ooft/pl.u-76jytNkvrl8"></textarea>
                         <button type="submit" class="btn btn-default sub" id = "sub_post_playlist">Submit</button>
                     </div>
                 </div>

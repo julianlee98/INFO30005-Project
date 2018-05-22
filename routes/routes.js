@@ -384,6 +384,13 @@ router.post("/setPlaylist", function(req,res){
     })
 });
 
+router.post("/logout", function(req, res){
+    console.log("what");
+    req.session.destroy(function() {
+        res.send('Session deleted');
+    });
+});
+
 
 
 module.exports = router;

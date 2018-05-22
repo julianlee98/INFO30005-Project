@@ -725,3 +725,10 @@ hr {
 .addSpace{
     padding-bottom: 40px;
 }
+
+#logout{
+    position: absolute;
+    top: 37px;
+    right: 60px;
+    opacity: 0.8;
+}

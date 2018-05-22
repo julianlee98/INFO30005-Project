@@ -165,9 +165,6 @@ var postTemplate = "<div class=\" basic_smoll\">\n" +
     "                                <p><time datetime=\"2018-4-15 08:00\">{3}</time></p>\n" +
     "                            </div>\n" +
     "\n" +
-    "                            <div class=\"btn-group btn-group-justified\">\n" +
-    "                                <a href=\"#\" class=\"btn btn-default\">Like</a>\n" +
-    "                            </div>\n" +
     "                        </div>";
 
 
