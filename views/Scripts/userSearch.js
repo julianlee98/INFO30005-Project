@@ -1,5 +1,6 @@
 $(document).ready(function(){
     generateResults();
+    logoutBehaviour();
 });
 
 
@@ -143,7 +144,13 @@ var templateSingle =     "        <div class=\"container-fluid cardcontainer dro
 
 
 
-
+function logoutBehaviour(){
+    $("#logout").click(function(){
+        $.post("/logout", function(){
+            window.location.replace("/login");
+        });
+    });
+}
 
 //https://www.sitepoint.com/jquery-string-template-format-function/
 

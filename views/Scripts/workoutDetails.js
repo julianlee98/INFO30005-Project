@@ -2,6 +2,7 @@ var request = "https://api.mlab.com/api/1/databases/webtech_project/collections/
 
 $(document).ready(function(){
     generateWorkouts();
+    logoutBehaviour();
 });
 
 
@@ -48,7 +49,13 @@ var template =  "<div class = \"a col-xs-4\">\n" +
     "                </div>"
 
 
-
+function logoutBehaviour(){
+    $("#logout").click(function(){
+        $.post("/logout", function(){
+            window.location.replace("/login");
+        });
+    });
+}
 
 
 //https://www.sitepoint.com/jquery-string-template-format-function/

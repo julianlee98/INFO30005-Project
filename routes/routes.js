@@ -288,6 +288,7 @@ router.post("/workoutSearch", function(req,res){
 
 router.get("/workoutSearch", function(req,res){
     res.send(globalWorkoutSearch);
+    globalWorkoutSearch = "";
 });
 
 router.post("/newWorkout", function(req, res){

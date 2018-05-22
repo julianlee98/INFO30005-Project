@@ -26,6 +26,7 @@ $(document).ready(function(){
     $(".add-to-workout").click(function(){
         addWorkout();
     });
+    logoutBehaviour();
 });
 
 function workoutSave(){
@@ -106,6 +107,13 @@ var template = "<div class=\" basic_smoll container\">\n" +
 
 
 
+function logoutBehaviour(){
+    $("#logout").click(function(){
+        $.post("/logout", function(){
+            window.location.replace("/login");
+        });
+    });
+}
 
 
 //https://www.sitepoint.com/jquery-string-template-format-function/

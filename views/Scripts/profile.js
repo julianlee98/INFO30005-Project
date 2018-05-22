@@ -7,6 +7,7 @@ $(document).ready(function(){
     generatePosts();
     setFollowBehaviour();
     addWorkoutButton();
+    logoutBehaviour();
 });
 
 function addWorkoutButton(){
@@ -168,7 +169,13 @@ var postTemplate = "<div class=\" basic_smoll\">\n" +
     "                        </div>";
 
 
-
+function logoutBehaviour(){
+    $("#logout").click(function(){
+        $.post("/logout", function(){
+            window.location.replace("/login");
+        });
+    });
+}
 
 
 

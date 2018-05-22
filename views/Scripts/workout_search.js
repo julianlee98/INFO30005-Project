@@ -1,6 +1,7 @@
 $(document).ready(function() {
     searchBehaviour();
     generateResults();
+    logoutBehaviour();
 } );
 
 
@@ -58,8 +59,12 @@ function callback(data){
     var fuse = new Fuse(allworkouts, options); // "list" is the item array
     console.log(allworkouts);
     $.get("/workoutSearch", function(data){
-        var result = fuse.search(data);
-        console.log(result);
+        if(data == ""){
+            var result = [];
+        }
+        else{
+            var result = fuse.search(data);
+        }
         callback2(result);
     });
 }
@@ -121,7 +126,13 @@ var template = "<div class=\"search-result\">\n" +
 
 
 
-
+function logoutBehaviour(){
+    $("#logout").click(function(){
+        $.post("/logout", function(){
+            window.location.replace("/login");
+        });
+    });
+}
 
 
 
