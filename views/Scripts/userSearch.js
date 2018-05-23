@@ -37,10 +37,10 @@ function a(result){
     if(result.length % 2 == 0){
         result.forEach(function(user){
             if(x%2 == 0){
-                string += JQUERY4U.UTIL.formatVarString(templateEven, user.first_name + " " + user.last_name, user.email, user.about );
+                string += JQUERY4U.UTIL.formatVarString(templateEven, user.first_name + " " + user.last_name, user.email, user.about, user.profileImg );
             }
             else{
-                string += JQUERY4U.UTIL.formatVarString(templateOdd, user.first_name + " " + user.last_name, user.email, user.about );
+                string += JQUERY4U.UTIL.formatVarString(templateOdd, user.first_name + " " + user.last_name, user.email, user.about, user.profileImg );
             }
             x+=1;
         });
@@ -51,15 +51,15 @@ function a(result){
         var lastuser = result.pop();
         result.forEach(function(user){
             if(x%2 == 0){
-                string += JQUERY4U.UTIL.formatVarString(templateEven, user.first_name + " " + user.last_name, user.email, user.about );
+                string += JQUERY4U.UTIL.formatVarString(templateEven, user.first_name + " " + user.last_name, user.email, user.about, user.profileImg );
             }
             else{
-                string += JQUERY4U.UTIL.formatVarString(templateOdd, user.first_name + " " + user.last_name, user.email, user.about );
+                string += JQUERY4U.UTIL.formatVarString(templateOdd, user.first_name + " " + user.last_name, user.email, user.about, user.profileImg );
             }
             x+=1;
         });
 
-        string += JQUERY4U.UTIL.formatVarString(templateSingle, lastuser.first_name + " " + lastuser.last_name, lastuser.email, lastuser.about );
+        string += JQUERY4U.UTIL.formatVarString(templateSingle, lastuser.first_name + " " + lastuser.last_name, lastuser.email, lastuser.about, lastuser.profileImg );
 
         $(".insertAfter").after(string);
         string = "";
@@ -102,7 +102,7 @@ var templateEven =
     "            <!--User Search Result-->\n" +
     "            <div class=\"col-sm-2 no_pad\">\n" +
     "                <div class=\"col-sm-12 container_card center_text\">\n" +
-    "                    <img class=\"profile-picture\" src=\"/link_images/user.png\">\n" +
+    "                    <img class=\"profile-picture\" src='{4}'>\n" +
     "                    <div><a href='javascript:void(0)' class = 'userLink' data-content = '{2}'> {1} </a></div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -115,7 +115,7 @@ var templateEven =
 
 var templateOdd = " <div class=\"col-sm-2 no_pad\">\n" +
 "                <div class=\"col-sm-12 container_card center_text\">\n" +
-"                    <img class=\"profile-picture\" src=\"/link_images/user.png\">\n" +
+"                    <img class=\"profile-picture\" src='{4}'>\n" +
 "                    <div><a href='javascript:void(0)' class = 'userLink' data-content = '{2}'> {1} </a></div>\n" +
 "                </div>\n" +
 "            </div>\n" +
@@ -130,7 +130,7 @@ var templateSingle =     "        <div class=\"container-fluid cardcontainer dro
     "            <!--User Search Result-->\n" +
     "            <div class=\"col-sm-2 no_pad\">\n" +
     "                <div class=\"col-sm-12 container_card center_text\">\n" +
-    "                    <img class=\"profile-picture\" src=\"/link_images/user.png\">\n" +
+    "                    <img class=\"profile-picture\" src='{4}'>\n" +
     "                    <div><a href='javascript:void(0)' class = 'userLink' data-content = '{2}'> {1} </a></div>\n" +
     "                </div>\n" +
     "            </div>\n" +

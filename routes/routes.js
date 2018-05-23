@@ -36,7 +36,9 @@ router.post("/submitSignup", function(req, res){
    var password = req.body.password;
    var about = req.body.about;
 
-   User.create({first_name: firstname, last_name: lastname, email:email, password: password, posts : [], friends : [email], about : about, workouts : []} , function(err,user){
+   User.create({first_name: firstname, last_name: lastname, email:email,
+       password: password, posts : [], friends : [email], about : about,
+       workouts : [], profileImg : '/link_images/user.png', playlist: 'pl.u-JPj3tWmLe4b'} , function(err,user){
        if(err){
            console.log(err);
            return res.status(500).send();
@@ -90,7 +92,8 @@ router.post("/newPost", function(req, res){
 
     User.findOne({email : req.session.user.email}).then(
         function(user) {
-            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length, 'date' : date, 'first_name' : fname, 'last_name' : lname} );
+            user.posts.push({'Body': Body, 'Likes' : likes, "index" : user.posts.length, 'date' : date,
+                'first_name' : fname, 'last_name' : lname, 'pic' : user.profileImg} );
             res.status(200).send();
             return user.save();
         }
@@ -390,6 +393,21 @@ router.post("/logout", function(req, res){
     req.session.destroy(function() {
         res.send('Session deleted');
     });
+});
+router.post("/newProfilePic", function(req, res){
+    if(!req.session.user){
+        return res.status(401).send();
+    }
+    var newProfilePic = req.body.picURL;
+    User.findOne({email : req.session.user.email}).then(
+        function(user) {
+            user.profileImg = newProfilePic;
+            res.status(200).send();
+            return user.save();
+        }
+    ).catch(function (err) {
+
+    })
 });
 
 

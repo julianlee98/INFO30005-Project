@@ -6,7 +6,8 @@ var Posts = mongoose.Schema({
     "index" : Number,
     "date" : String,
     "first_name" : String,
-    "last_name" : String
+    "last_name" : String,
+    "pic": String
 });
 
 var Workouts = mongoose.Schema({
@@ -30,7 +31,7 @@ var userSchema = mongoose.Schema(
         "posts" : [Posts],
         "friends" : [String],
         "about" : String,
-        "profileImg": { "data": Buffer, "contentType": String },
+        "profileImg": String,
         "playlist" : String,
         "workouts" : [Workouts]
     }

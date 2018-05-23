@@ -235,9 +235,10 @@ function createPostListAndGenerate(list){
                     });
                 });
     });
+    //I had no choice but to do this
     setTimeout(function() {
         x(resolveArray);
-    }, 1000)
+    }, 1500)
 
 }
 
@@ -290,7 +291,7 @@ function generatePosts(input, curruser){
         });
         if(found ==  1){
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div><a href = 'javascript:void(0)' class = 'userLink' data-content = '{3}'>{6}</a></div>\n" +
+                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='{7}'><div><a href = 'javascript:void(0)' class = 'userLink' data-content = '{3}'>{6}</a></div>\n" +
                 " </div>\n" +
                 " </div>\n" +
                 " <div class='col-sm-10 no_pad'>\n" +
@@ -304,12 +305,12 @@ function generatePosts(input, curruser){
                 " <div class='btn-group'> <a href='javascript:void(0)' class='btn btn-default like liked' data-content = '{3}' data-index = '{4}'>Like</a> </div>" +
                 " </div>\n" +
                 " </div>\n" +
-                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name));
+                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name), post.pic);
             $("#post_creation").after(html_to_add);
         }
         else{
             html_to_add = JQUERY4U.UTIL.formatVarString("<div class='container-fluid cardcontainer dropdown_newitem norm_posts row-eq-height'><div class='col-sm-2 no_pad'>\n" +
-                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='/link_images/user.png'><div><a href = 'javascript:void(0)' class = 'userLink' data-content = '{3}'>{6}</a></div>\n" +
+                " <div class='col-sm-12 container_card center_text'><img class='profile-picture' src='{7}'><div><a href = 'javascript:void(0)' class = 'userLink' data-content = '{3}'>{6}</a></div>\n" +
                 " </div>\n" +
                 " </div>\n" +
                 " <div class='col-sm-10 no_pad'>\n" +
@@ -323,7 +324,7 @@ function generatePosts(input, curruser){
                 " <div class='btn-group '> <a href='javascript:void(0)' class='btn btn-default like' data-content = '{3}' data-index = '{4}'>Like</a> </div>" +
                 " </div>\n" +
                 " </div>\n" +
-                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name));
+                " </div>", post.Body, post.likes.length, email, post.index, d.format('Do MMMM YYYY h:ss a'), (post.first_name + ' ' +  post.last_name), post.pic);
             $("#post_creation").after(html_to_add);
         }
     });

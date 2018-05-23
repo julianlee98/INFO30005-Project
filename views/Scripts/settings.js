@@ -1,5 +1,6 @@
 $(document).ready(function() {
     aboutUpdateBehaviour();
+    profilePicUpdateBehaviour();
     logoutBehaviour();
 } );
 
@@ -28,4 +29,22 @@ function logoutBehaviour(){
             window.location.replace("/login");
         });
     });
+}
+
+function profilePicUpdateBehaviour(){
+    $("#profileURLBtn").click(function(){
+        var newUrl = $("#pictureURL").val();
+        $.ajax({
+            type:    "POST",
+            url:     "/newProfilePic",
+            data:    {"picURL": newUrl},
+            success: function(data) {
+                $("#pictureURL").val("");
+            }
+            ,
+            // vvv---- This is the new bit
+            error:   function(jqXHR, textStatus, errorThrown) {
+            }
+        });
+    })
 }
