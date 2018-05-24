@@ -36,17 +36,31 @@ router.post("/submitSignup", function(req, res){
    var password = req.body.password;
    var about = req.body.about;
 
-   User.create({first_name: firstname, last_name: lastname, email:email,
-       password: password, posts : [], friends : [email], about : about,
-       workouts : [], profileImg : '/link_images/user.png', playlist: 'pl.u-JPj3tWmLe4b'} , function(err,user){
-       if(err){
-           console.log(err);
-           return res.status(500).send();
-       }
-       req.session.user = user;
-       res.redirect("/home");
-       return res.status(202).send();
-   });
+
+   //Check if email already exists in system
+
+    User.findOne({email : email}).then(
+        function(user) {
+            if(user == undefined){
+                User.create({first_name: firstname, last_name: lastname, email:email,
+                    password: password, posts : [], friends : [email], about : about,
+                    workouts : [], profileImg : '/link_images/user.png', playlist: 'pl.u-JPj3tWmLe4b'} , function(err,user){
+                    if(err){
+                        console.log(err);
+                        return res.status(500).send();
+                    }
+                    req.session.user = user;
+                    res.redirect("/home");
+                    return res.status(202).send();
+                });
+            }
+            else{
+                res.render("login", {error : "Email already in use*"});
+                return res.status(200).send();
+            }
+        }
+    ).catch(function (err) {
+    });
 });
 
 router.get('/home', function (req, res) {

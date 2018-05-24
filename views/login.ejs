@@ -79,8 +79,9 @@
                             <div class="form-group col-sm-12">
                                 <label for="signUpEmail">Email address</label>
                                 <input type="email" class="form-control" name = "email" id="signUpEmail" placeholder="Enter email">
+                                <p class = "err_message"> <%= error == undefined ? "" : error %> </p>
                             </div>
-                            <!--Username-->
+                            <!--About-->
                             <div class="form-group col-sm-12">
                                 <label for="signUpUsername">About</label>
                                 <input type="text" class="form-control" id="signUpUsername" name = "about" placeholder="5 foot 1 basketball player">

@@ -5,7 +5,7 @@ module.exports.mainContent = function(req, res){
 };
 
 module.exports.loginPage  = function (req, res) {
-    res.render('login');
+    res.render('login', {error : undefined});
 };
 
 module.exports.homePage = function (req,res) {

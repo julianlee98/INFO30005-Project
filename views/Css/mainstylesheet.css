@@ -732,3 +732,8 @@ hr {
     right: 60px;
     opacity: 0.8;
 }
+
+.err_message{
+    color: red;
+    margin-top: 1%;
+}
