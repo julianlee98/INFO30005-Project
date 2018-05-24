@@ -145,7 +145,7 @@ function generatePosts(){
             posts.forEach(function(post){
                 var Body = post.Body;
                 var likes = post.likes.length;
-                var d = new moment(post.date);
+                var d = new moment(new Date(post.date));
                 var htmlToAdd = JQUERY4U.UTIL.formatVarString(postTemplate, Body, likes, d.format('Do MMMM YYYY h:ss a'));
                 $(".insert_post_after").after(htmlToAdd);
             });

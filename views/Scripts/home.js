@@ -30,30 +30,9 @@ $(document).ready(function(){
     newPostBehaviour();
     fileBehaviour();
     playListBehaviour();
+    searchBehaviour();
     logoutBehaviour();
 
-    $("#friend").click(function(){
-        $(".follow-request").hide();
-    });
-    $("#friend2").click(function(){
-        $(".follow-request").hide();
-    });
-
-    $(".search_btn").click(function(){
-        var search = $(".search_field").val();
-        $.ajax({
-            type:    "POST",
-            url:     "/newSearch",
-            data:    {"toSearch" : search},
-            success: function(data) {
-                window.location.replace("/userSearch");
-            }
-            ,
-            // vvv---- This is the new bit
-            error:   function(jqXHR, textStatus, errorThrown) {
-            }
-        });
-    });
 });
 
 // Post logic ----------------------------------------
@@ -252,8 +231,8 @@ function x(array){
 
 function b(array, curruser){
     array.sort(function(a, b) {
-        var dateA = moment(a.post.date); // ignore upper and lowercase
-        var dateB = moment(b.post.date) ; // ignore upper and lowercase
+        var dateA = moment(new Date(a.post.date)); // ignore upper and lowercase
+        var dateB = moment(new Date(b.post.date)) ; // ignore upper and lowercase
         if (dateA.isBefore(dateB)) {
             return -1;
         }
@@ -283,7 +262,7 @@ function generatePosts(input, curruser){
         var post = postEmail.post;
         var found = 0;
         //Unpack datetime
-        var d = new moment(post.date);
+        var d = new moment(new Date(post.date));
         post.likes.forEach(function(like){
             if(like == curruser){
                 found = 1;
@@ -399,6 +378,25 @@ function logoutBehaviour(){
         });
     });
 }
+
+function searchBehaviour(){
+    $(".search_btn").click(function(){
+        var search = $(".search_field").val();
+        $.ajax({
+            type:    "POST",
+            url:     "/newSearch",
+            data:    {"toSearch" : search},
+            success: function(data) {
+                window.location.replace("/userSearch");
+            }
+            ,
+            // vvv---- This is the new bit
+            error:   function(jqXHR, textStatus, errorThrown) {
+            }
+        });
+    });
+}
+
 
 //https://itunes.apple.com/au/playlist/ooft/pl.u-76jytNkvrl8
 

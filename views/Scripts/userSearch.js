@@ -1,5 +1,6 @@
 $(document).ready(function(){
     generateResults();
+    searchBehaviour();
     logoutBehaviour();
 });
 
@@ -148,6 +149,25 @@ function logoutBehaviour(){
     $("#logout").click(function(){
         $.post("/logout", function(){
             window.location.replace("/login");
+        });
+    });
+}
+
+
+function searchBehaviour(){
+    $(".search_btn").click(function(){
+        var search = $(".search_field").val();
+        $.ajax({
+            type:    "POST",
+            url:     "/newSearch",
+            data:    {"toSearch" : search},
+            success: function(data) {
+                window.location.replace("/userSearch");
+            }
+            ,
+            // vvv---- This is the new bit
+            error:   function(jqXHR, textStatus, errorThrown) {
+            }
         });
     });
 }
