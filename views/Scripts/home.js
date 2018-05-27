@@ -88,6 +88,7 @@ function set_n_post(to_set,n_posts){
 //End of post logic ---------------------------------------
 
 
+//I am real proud of the fact that the code below actually works please read this ---------
 
 function likeBehaviour(){
     $(".like").click(function(){
